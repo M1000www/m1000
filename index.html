@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Aprende ciberseguridad desde cero: privacidad, contraseñas, phishing y defensa digital responsable.">
+  <title>DRAGON CYBER | Aprende ciberseguridad</title>
+  <style>
+    :root {
+      --bg: #08111f; --panel: #101d30; --panel2: #14243a;
+      --text: #eef5ff; --muted: #a9bad0; --blue: #47c8ff;
+      --red: #ff555f; --line: rgba(155,190,225,.2);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text); background: radial-gradient(ellipse at top, #152b43 0, var(--bg) 55%); line-height: 1.6; }
+    a { color: var(--blue); }
+    .wrap { width: min(1100px, 92%); margin: auto; }
+    header { border-bottom: 1px solid var(--line); background: rgba(8,17,31,.88); position: sticky; top: 0; backdrop-filter: blur(12px); z-index: 10; }
+    .nav { min-height: 70px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { font-weight: 900; letter-spacing: 1.5px; text-decoration: none; color: var(--text); }
+    .brand span { color: var(--blue); }
+    nav { display: flex; gap: 18px; flex-wrap: wrap; }
+    nav a { text-decoration: none; color: var(--muted); font-size: .95rem; }
+    nav a:hover { color: var(--blue); }
+    .hero { padding: 70px 0 55px; display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: 35px; }
+    .eyebrow { color: var(--blue); font-weight: 800; letter-spacing: 2px; text-transform: uppercase; font-size: .78rem; }
+    h1 { font-size: clamp(2.5rem, 6vw, 4.8rem); line-height: 1.02; margin: 14px 0 20px; letter-spacing: -2px; }
+    h1 span { color: var(--red); }
+    .lead { color: var(--muted); font-size: 1.15rem; max-width: 620px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .btn { display: inline-block; padding: 12px 18px; border-radius: 10px; text-decoration: none; font-weight: 800; border: 1px solid var(--blue); }
+    .primary { background: var(--blue); color: #06111d; }
+    .secondary { color: var(--text); }
+    .logo-frame { border: 1px solid var(--line); border-radius: 20px; overflow: hidden; box-shadow: 0 20px 70px rgba(0,0,0,.35); background: #0b1421; }
+    .logo-frame img { display: block; width: 100%; height: auto; }
+    section { padding: 55px 0; }
+    .section-head { max-width: 700px; margin-bottom: 25px; }
+    h2 { font-size: clamp(1.8rem, 4vw, 2.7rem); margin: 0 0 10px; }
+    .section-head p, .muted { color: var(--muted); }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .card { padding: 22px; background: linear-gradient(145deg, var(--panel2), var(--panel)); border: 1px solid var(--line); border-radius: 16px; }
+    .card .num { color: var(--blue); font-weight: 900; font-size: .85rem; letter-spacing: 1px; }
+    .card h3 { margin: 10px 0 8px; }
+    .card p { color: var(--muted); margin-bottom: 0; }
+    .notice { border-left: 4px solid var(--red); background: rgba(255,85,95,.08); padding: 18px 20px; border-radius: 0 12px 12px 0; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .panel { padding: 24px; border: 1px solid var(--line); border-radius: 16px; background: rgba(16,29,48,.75); }
+    footer { padding: 28px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: .9rem; }
+
+    .course-card { display: flex; flex-direction: column; gap: 10px; }
+    .course-card .course-tag { color: var(--blue); font-size: .78rem; font-weight: 900; letter-spacing: 1px; }
+    .course-card .course-link { display: inline-block; align-self: flex-start; margin-top: auto; padding: 9px 13px; border-radius: 9px; text-decoration: none; color: #06111d; background: var(--blue); font-weight: 800; }
+    .course-card .course-link:hover { filter: brightness(1.08); }
+
+    .course-search { margin: 0 0 22px; padding: 18px; border: 1px solid var(--line); border-radius: 14px; background: rgba(16,29,48,.75); }
+    .course-search label { display: block; font-weight: 800; margin-bottom: 8px; }
+    .course-search-row { display: flex; gap: 10px; }
+    .course-search input { width: 100%; min-width: 0; padding: 13px 14px; border-radius: 9px; border: 1px solid var(--line); background: #08111f; color: var(--text); font: inherit; }
+    .course-search input:focus { outline: 2px solid var(--blue); outline-offset: 2px; }
+    .course-search button { padding: 11px 15px; border: 0; border-radius: 9px; background: var(--blue); color: #06111d; font: inherit; font-weight: 800; cursor: pointer; }
+    .course-search button:hover { filter: brightness(1.08); }
+    .search-status { color: var(--muted); margin: 10px 0 0; font-size: .95rem; }
+    .course-card[hidden] { display: none !important; }
+    @media (max-width: 480px) { .course-search-row { flex-direction: column; } .course-search button { width: 100%; } }
+    
+    @media (max-width: 760px) {
+      .hero { grid-template-columns: 1fr; padding-top: 45px; }
+      .logo-frame { max-width: 600px; }
+      .cards { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .nav { padding: 12px 0; align-items: flex-start; flex-direction: column; }
+      nav { gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#inicio">DRAGON <span>CYBER</span></a>
+      <nav aria-label="Navegación principal">
+        <a href="#aprender">Aprender</a>
+        <a href="#cursos">Cursos</a>
+        <a href="#ruta">Ruta inicial</a>
+        <a href="#etica">Uso responsable</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="wrap hero" id="inicio">
+      <div>
+        <div class="eyebrow">Ciberseguridad para principiantes</div>
+        <h1>Defiende tu mundo <span>digital.</span></h1>
+        <p class="lead">Aprende a proteger tus cuentas, reconocer engaños y entender los fundamentos de la seguridad informática, paso a paso y desde cero.</p>
+        <div class="actions">
+          <a class="btn primary" href="#aprender">Empezar a aprender</a>
+          <a class="btn secondary" href="#ruta">Ver la ruta de nivel 1</a>
+        </div>
+      </div>
+      <div class="logo-frame">
+        <img src="assets/logo-dragon.jpg" alt="Logo de dragón con runas azules y rojas">
+      </div>
+    </section>
+
+    <section class="wrap" id="aprender">
+      <div class="section-head">
+        <div class="eyebrow">Fundamentos</div>
+        <h2>¿Qué vas a aprender?</h2>
+        <p>Una base sólida empieza por comprender las amenazas y aprender a reducir los riesgos cotidianos.</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <div class="num">01 / PROTECCIÓN</div>
+          <h3>Contraseñas y cuentas</h3>
+          <p>Usa claves únicas, activa la autenticación multifactor y revisa los accesos de tus cuentas.</p>
+        </article>
+        <article class="card">
+          <div class="num">02 / DETECCIÓN</div>
+          <h3>Phishing y estafas</h3>
+          <p>Aprende a detectar mensajes sospechosos, enlaces engañosos y peticiones de códigos.</p>
+        </article>
+        <article class="card">
+          <div class="num">03 / DEFENSA</div>
+          <h3>Dispositivos y redes</h3>
+          <p>Entiende las actualizaciones, los permisos de las apps, el Wi-Fi seguro y las copias de seguridad.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="wrap" id="ruta">
+      <div class="section-head">
+        <div class="eyebrow">Tu primer recorrido</div>
+        <h2>Ruta de aprendizaje · Nivel 1</h2>
+        <p>Avanza en orden. No necesitas conocimientos previos ni herramientas de pago.</p>
+      </div>
+      <div class="cards">
+        <article class="card"><div class="num">MÓDULO 1</div><h3>Conceptos básicos</h3><p>Confidencialidad, integridad, disponibilidad, amenazas y vulnerabilidades.</p></article>
+        <article class="card"><div class="num">MÓDULO 2</div><h3>Identidad digital</h3><p>Contraseñas seguras, autenticación multifactor y recuperación de cuentas.</p></article>
+        <article class="card"><div class="num">MÓDULO 3</div><h3>Seguridad diaria</h3><p>Phishing, privacidad, actualizaciones, redes y respuesta ante incidentes.</p></article>
+      </div>
+    </section>
+
+
+    <section class="wrap" id="cursos">
+      <div class="section-head">
+        <div class="eyebrow">Biblioteca gratuita</div>
+        <h2>Empieza con nuestros cursos</h2>
+        <p>Material introductorio en PDF para estudiar a tu ritmo. Descarga los documentos y consérvalos para leerlos sin conexión.</p>
+      </div>
+      <div class="course-search">
+        <label for="courseSearch">Buscar cursos</label>
+        <div class="course-search-row">
+          <input id="courseSearch" type="search" placeholder="Ej.: Python, redes, privacidad..." autocomplete="off" aria-describedby="courseSearchStatus">
+          <button id="clearCourseSearch" type="button">Limpiar</button>
+        </div>
+        <p class="search-status" id="courseSearchStatus" role="status" aria-live="polite">Mostrando todos los cursos.</p>
+      </div>
+      <div class="cards" id="courseGrid">
+        <article class="card course-card" data-search="ciberseguridad seguridad contraseñas phishing privacidad dispositivos redes wifi defensa">
+          <div class="course-tag">CURSO 01 · NIVEL 1</div>
+          <h3>Fundamentos de ciberseguridad</h3>
+          <p>Aprende sobre contraseñas, phishing, seguridad de dispositivos, redes Wi-Fi, privacidad y cómo actuar ante incidentes.</p>
+          <a class="course-link" href="cursos/curso-ciberseguridad-nivel-1.pdf" download>Descargar curso PDF</a>
+        </article>
+        <article class="card course-card" data-search="programación programacion python código codigo variables datos condiciones bucles listas funciones errores principiante">
+          <div class="course-tag">CURSO 02 · NIVEL 1</div>
+          <h3>Programación con Python</h3>
+          <p>Una guía teórica para empezar desde cero: variables, tipos de datos, condiciones, bucles, listas, funciones y errores.</p>
+          <a class="course-link" href="cursos/curso-programacion-nivel-1.pdf" download>Descargar curso PDF</a>
+        </article>
+        <article class="card course-card" data-search="redes linux terminal sistemas operativos próximamente proximamente">
+          <div class="course-tag">PRÓXIMAMENTE</div>
+          <h3>Redes y Linux</h3>
+          <p>Una futura guía para comprender redes, terminal y conceptos básicos de sistemas operativos.</p>
+          <span class="muted">Todavía no disponible</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="wrap" id="etica">
+      <div class="about-grid">
+        <div class="panel">
+          <div class="eyebrow">Nuestra filosofía</div>
+          <h2>Aprende con responsabilidad.</h2>
+          <p class="muted">La ciberseguridad sirve para proteger sistemas y personas. Practica únicamente en tus propios dispositivos, en laboratorios educativos o en sistemas para los que tengas autorización explícita.</p>
+        </div>
+        <div class="panel">
+          <h3>Reglas esenciales</h3>
+          <p>✓ Respeta la privacidad de otras personas.</p>
+          <p>✓ No intentes acceder a cuentas o redes ajenas.</p>
+          <p>✓ No compartas contraseñas ni códigos de verificación.</p>
+          <p>✓ Utiliza recursos educativos legales y seguros.</p>
+        </div>
+      </div>
+      <div class="notice" style="margin-top:20px">
+        <strong>Importante:</strong> esta web es una plantilla educativa. No recopila contraseñas ni datos personales y no incluye funciones de inicio de sesión.
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">© 2026 Dragon Cyber · Educación y defensa digital responsable.</div>
+  </footer>
+
+  <script>
+    (() => {
+      const searchInput = document.getElementById('courseSearch');
+      const clearButton = document.getElementById('clearCourseSearch');
+      const status = document.getElementById('courseSearchStatus');
+      const cards = Array.from(document.querySelectorAll('#courseGrid .course-card'));
+
+      if (!searchInput || !clearButton || !status || cards.length === 0) return;
+
+      function filterCourses() {
+        const query = searchInput.value
+          .toLocaleLowerCase('es')
+          .normalize('NFD')
+          .replace(/[\\u0300-\\u036f]/g, '')
+          .trim();
+
+        let visible = 0;
+        cards.forEach((card) => {
+          const searchableText = (card.innerText + ' ' + (card.dataset.search || ''))
+            .toLocaleLowerCase('es')
+            .normalize('NFD')
+            .replace(/[\\u0300-\\u036f]/g, '');
+          const matches = searchableText.includes(query);
+          card.hidden = !matches;
+          if (matches) visible++;
+        });
+
+        if (!query) {
+          status.textContent = 'Mostrando todos los cursos (' + visible + ').';
+        } else if (visible === 0) {
+          status.textContent = 'No se encontraron cursos para «' + searchInput.value.trim() + '». Prueba con otra palabra.';
+        } else {
+          status.textContent = 'Se encontraron ' + visible + (visible === 1 ? ' curso.' : ' cursos.');
+        }
+      }
+
+      searchInput.addEventListener('input', filterCourses);
+      clearButton.addEventListener('click', () => {
+        searchInput.value = '';
+        filterCourses();
+        searchInput.focus();
+      });
+      filterCourses();
+    })();
+  </script>
+
+</body>
+</html>
