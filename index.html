@@ -1,63 +1,139 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Dragon Cyber: cursos gratuitos descargables de ciberseguridad, programación, redes, Linux y privacidad digital.">
-<title>Dragon Cyber | Aprende · Protege · Construye</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dragon Cyber | Academia Digital</title>
 <style>
-:root{--bg:#030914;--panel:#071426;--panel2:#081a2d;--blue:#08a9ff;--cyan:#00d5ff;--text:#eaf5ff;--muted:#a8bed2;--line:#12395b}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 80% 0%,#082b50 0%,transparent 38%),var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif;line-height:1.55}a{color:inherit;text-decoration:none}.wrap{width:min(1180px,92%);margin:auto}
-header{position:sticky;top:0;z-index:5;background:#020812ed;border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}.nav{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:70px}.brand{font-weight:900;letter-spacing:1px;font-size:clamp(18px,2vw,26px);display:flex;align-items:center;gap:10px}.dragon{color:var(--blue);font-size:30px;text-shadow:0 0 18px #008cff}.brand span:last-child{color:var(--blue)}nav{display:flex;gap:20px;flex-wrap:wrap;font-size:14px;color:#d4e6f5}nav a:hover,.link:hover{color:var(--cyan)}.search{width:210px;max-width:100%;padding:10px 12px;background:#020a14;border:1px solid #17476c;border-radius:24px;color:white}
-.hero{padding:70px 0 44px;position:relative;overflow:hidden;border-bottom:1px solid var(--line)}.hero:after{content:"";position:absolute;width:420px;height:420px;right:4%;top:-70px;border-radius:50%;background:radial-gradient(circle,#007fff33,transparent 68%);pointer-events:none}.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:40px;position:relative;z-index:1}.eyebrow{letter-spacing:4px;color:#91cfff;font-size:12px;text-transform:uppercase}.hero h1{font-size:clamp(42px,6vw,72px);line-height:.98;margin:15px 0;text-transform:uppercase;letter-spacing:-2px}.hero h1 span{color:var(--blue);text-shadow:0 0 24px #008cff66}.hero p{font-size:18px;color:#c1d8e9;max-width:580px}.buttons{display:flex;gap:12px;flex-wrap:wrap;margin:25px 0}.btn{display:inline-block;padding:12px 20px;border-radius:12px;border:1px solid var(--blue);font-weight:bold;cursor:pointer;background:transparent;color:var(--text)}.btn.primary{background:linear-gradient(120deg,#0788ff,#00c7ff);color:#00101c;box-shadow:0 0 20px #008cff30}.btn:hover{transform:translateY(-1px);filter:brightness(1.12)}.hero-art{min-height:300px;border:1px solid #0d4169;border-radius:22px;background:linear-gradient(135deg,#071a2c,#020710);display:flex;align-items:center;justify-content:center;text-align:center;padding:30px;box-shadow:inset 0 0 45px #007bff14,0 15px 55px #0007}.hero-art .bigdragon{font-size:100px;color:#00aaff;text-shadow:0 0 35px #007bff}.hero-art h2{margin:0;font-size:26px}.hero-art p{font-size:14px;margin:8px auto;color:#a9cbe5}.features{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:22px 0}.feature{color:#bcd2e5;font-size:13px;border-right:1px solid var(--line);padding:5px 14px}.feature b{display:block;color:white;font-size:14px}.section{padding:42px 0}.section-head{display:flex;justify-content:space-between;align-items:end;gap:18px;margin-bottom:20px}.section h2{font-size:29px;margin:0}.sub{color:var(--muted);margin:4px 0 0}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.card{background:linear-gradient(145deg,#08192b,#030b16);border:1px solid var(--line);border-radius:16px;padding:20px;display:flex;flex-direction:column;min-height:240px;box-shadow:0 10px 25px #0002}.icon{font-size:27px;color:var(--blue)}.card h3{margin:8px 0 5px;font-size:18px}.card p{color:#b5cadd;font-size:14px;margin:5px 0 15px}.meta{color:var(--cyan);font-size:12px;margin-top:auto;padding:7px 0}.card .btn{width:100%;text-align:center;padding:10px}.columns{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:20px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:28px 0}.mini-list{list-style:none;padding:0;margin:12px 0}.mini-list li{border-bottom:1px solid #10304c;padding:9px 0;color:#c1d6e8;font-size:14px}.mini-list li:before{content:"›";color:var(--cyan);font-weight:bold;margin-right:10px}.product{border:1px solid var(--line);border-radius:12px;padding:14px;margin-top:12px;background:#061324}.product b{display:block}.tag{font-size:11px;color:var(--cyan)}.about{display:grid;grid-template-columns:1.2fr 1fr;gap:25px;align-items:center}.aboutbox{padding:24px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(120deg,#071a2c,#030914)}footer{border-top:1px solid var(--line);padding:25px 0;color:#9fb7cc;font-size:13px}.foot{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}.notice{font-size:12px;color:#8ea9c2;margin-top:20px}.empty{display:none;color:#aac4da;padding:20px}.resource-link{color:var(--cyan);text-decoration:underline}
-@media(max-width:850px){.hero-grid,.about{grid-template-columns:1fr}.hero-art{min-height:220px}.features{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:repeat(2,1fr)}.columns{grid-template-columns:1fr}.nav{padding:12px 0;align-items:flex-start;flex-wrap:wrap}nav{order:3;width:100%;gap:13px}.search{width:180px}}
-@media(max-width:560px){.grid{grid-template-columns:1fr}.hero{padding-top:45px}.hero h1{font-size:43px}.section-head{align-items:flex-start;flex-direction:column}.features{grid-template-columns:1fr 1fr}.feature{padding:5px;border-right:0}.search{width:100%}}
+:root{--bg:#080d18;--panel:#111b2d;--green:#20f59b;--text:#edf5ff;--muted:#aab8ce}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
+header{padding:25px 6%;background:#0d1525;border-bottom:1px solid #20314a}
+.logo{font-size:28px;font-weight:bold;color:var(--green)}
+header p{color:var(--muted)}
+nav{display:flex;gap:18px;flex-wrap:wrap;margin-top:18px}
+a{color:var(--green);text-decoration:none}
+button{cursor:pointer;border:0;border-radius:8px;padding:11px 14px;font-weight:bold}
+main{max-width:1150px;margin:auto;padding:25px 18px}
+.hero{padding:35px 20px;background:linear-gradient(135deg,#12283b,#101527);border-radius:16px}
+h1{font-size:clamp(30px,5vw,48px)}
+h2{margin-top:35px}
+.green{color:var(--green)}
+.notice{background:#142a27;border:1px solid #206c50;padding:13px;border-radius:9px;color:#bfffe2}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:17px}
+.card{background:var(--panel);border:1px solid #26364d;padding:19px;border-radius:12px}
+.card p{color:var(--muted);line-height:1.5}
+.price{font-size:22px;font-weight:bold;margin:14px 0}
+.add{background:var(--green);color:#07140e}
+.download{display:inline-block;margin-top:12px;padding:10px;border:1px solid var(--green);border-radius:8px}
+.remove{background:#4a2230;color:white;margin:4px}
+#cart{background:#101a2b;border:1px solid #2b4059;padding:20px;border-radius:12px;margin-top:18px}
+#cartItems{padding-left:20px;line-height:2}
+.secondary{background:#29384d;color:white;margin:4px}
+footer{text-align:center;padding:30px;color:var(--muted)}
+button:hover{filter:brightness(1.12)}
 </style>
 </head>
 <body>
-<header><div class="wrap nav">
-<a class="brand" href="#inicio"><span class="dragon">🐉</span> DRAGON <span>CYBER</span></a>
-<nav aria-label="Navegación principal"><a href="#inicio">Inicio</a><a href="#cursos">Cursos</a><a href="#tienda">Tienda</a><a href="#recursos">Recursos</a><a href="#blog">Blog</a><a href="#nosotros">Sobre nosotros</a></nav>
-<input id="search" class="search" type="search" placeholder="Buscar cursos..." aria-label="Buscar cursos">
-</div></header>
+<header>
+  <div class="logo">🐉 DRAGON CYBER</div>
+  <p>Aprende tecnología, programación y ciberseguridad.</p>
+  <nav>
+    <a href="#inicio">Inicio</a>
+    <a href="#cursos">Cursos</a>
+    <a href="#tienda">Tienda</a>
+    <a href="#carrito">Carrito 🛒 (<span id="count">0</span>)</a>
+  </nav>
+</header>
 <main>
-<section class="hero" id="inicio"><div class="wrap hero-grid">
-<div><div class="eyebrow">Aprende · Protege · Construye</div><h1>Dragon <span>Cyber</span></h1><p>Tu portal de formación en ciberseguridad, programación y tecnología. Aprende a tu ritmo, desde cualquier lugar.</p><div class="buttons"><a class="btn primary" href="#cursos">Explorar cursos →</a><a class="btn" href="#tienda">▣ Ver tienda</a></div>
-<p class="sub">Cursos en PDF · Descarga directa · Acceso gratuito</p></div>
-<div class="hero-art"><div><div class="bigdragon">🐉</div><h2>Tu futuro digital empieza aquí</h2><p>Aprende habilidades tecnológicas de forma responsable.</p></div></div>
-</div></section>
-<div class="wrap features"><div class="feature">⬡ <b>Cursos en PDF</b>Descarga y estudia sin conexión</div><div class="feature">ϟ <b>Acceso inmediato</b>Empieza hoy mismo</div><div class="feature">▱ <b>En cualquier dispositivo</b>PC, móvil o tablet</div><div class="feature">✧ <b>Aprendizaje responsable</b>Practica con autorización</div></div>
-<section class="section wrap" id="cursos"><div class="section-head"><div><h2>Nuestros cursos</h2><p class="sub">Guías descargables para empezar a aprender tecnología.</p></div><span class="tag">11 PDF GRATUITOS</span></div>
-<div class="grid" id="courseGrid">
-<article class="card" data-search="ciberseguridad seguridad digital contraseñas phishing privacidad"><div class="icon">🛡️</div><h3>Ciberseguridad · Nivel 1</h3><p>Fundamentos de seguridad digital, contraseñas, phishing y protección de dispositivos.</p><div class="meta">PDF · Guía inicial</div><a class="btn primary" href="cursos/ciberseguridad-nivel-1.pdf" download>Descargar PDF ↓</a></article>
-<article class="card" data-search="programacion python variables bucles codigo"><div class="icon">⌘</div><h3>Programación · Nivel 1</h3><p>Aprende lógica, variables, condiciones, bucles y crea tu primer programa.</p><div class="meta">PDF · Guía inicial</div><a class="btn primary" href="cursos/programacion-nivel-1.pdf" download>Descargar PDF ↓</a></article>
-<article class="card" data-search="hacking etico laboratorio permiso vulnerabilidades"><div class="icon">⌁</div><h3>Hacking ético · Nivel 1</h3><p>Principios, permisos, laboratorios seguros y comunicación responsable de fallos.</p><div class="meta">PDF · Guía responsable</div><a class="btn primary" href="cursos/hacking-etico-nivel-1.pdf" download>Descargar PDF ↓</a></article>
-<article class="card" data-search="redes comunicaciones ip router dns https"><div class="icon">◎</div><h3>Redes y comunicaciones · Nivel 1</h3><p>Conoce IP, router, Wi-Fi, DNS y la diferencia entre HTTP y HTTPS.</p><div class="meta">PDF · Guía inicial</div><a class="btn primary" href="cursos/redes-nivel-1.pdf" download>Descargar PDF ↓</a></article>
-<article class="card" data-search="linux terminal comandos archivos permisos"><div class="icon">▱</div><h3>Linux · Nivel 1</h3><p>Primeros pasos con la terminal, comandos, archivos y permisos.</p><div class="meta">PDF · Guía inicial</div><a class="btn primary" href="cursos/linux-nivel-1.pdf" download>Descargar PDF ↓</a></article>
-<article class="card" data-search="privacidad digital huella datos redes sociales"><div class="icon">🔒</div><h3>Privacidad digital · Nivel 1</h3><p>Cuida tu huella digital, tus datos personales y los permisos de tus aplicaciones.</p><div class="meta">PDF · Guía inicial</div><a class="btn primary" href="cursos/privacidad-digital-nivel-1.pdf" download>Descargar PDF ↓</a></article>
-
-<article class="card" data-search="python programacion variables bucles funciones"><div class="icon">🐍</div><h3>Python desde cero</h3><p>Variables, condiciones, bucles, funciones y un mini proyecto guiado.</p><div class="meta">PDF · Nuevo curso</div><a class="btn primary" href="cursos/python-desde-cero.pdf" download>Descargar PDF ↓</a></article>
-<article class="card" data-search="desarrollo web html css paginas diseño"><div class="icon">🌐</div><h3>Desarrollo web con HTML y CSS</h3><p>Crea páginas con estructura, estilos, tarjetas y diseño adaptable.</p><div class="meta">PDF · Nuevo curso</div><a class="btn primary" href="cursos/desarrollo-web-html-css.pdf" download>Descargar PDF ↓</a></article>
-<article class="card" data-search="seguridad cuentas contraseñas autenticacion phishing"><div class="icon">🔑</div><h3>Seguridad de cuentas y contraseñas</h3><p>Protege tus cuentas con claves únicas, segundo factor y recuperación segura.</p><div class="meta">PDF · Nuevo curso</div><a class="btn primary" href="cursos/seguridad-cuentas-contrasenas.pdf" download>Descargar PDF ↓</a></article>
-<article class="card" data-search="linux intermedio terminal comandos permisos procesos"><div class="icon">🐧</div><h3>Linux intermedio</h3><p>Practica rutas, permisos, procesos, búsqueda y copias de seguridad.</p><div class="meta">PDF · Nuevo curso</div><a class="btn primary" href="cursos/linux-intermedio.pdf" download>Descargar PDF ↓</a></article>
-<article class="card" data-search="laboratorio ciberseguridad etica practicas autorizadas"><div class="icon">🔬</div><h3>Laboratorio de ciberseguridad ética</h3><p>Aprende a practicar con autorización y documentar hallazgos responsablemente.</p><div class="meta">PDF · Nuevo curso</div><a class="btn primary" href="cursos/laboratorio-ciberseguridad-etica.pdf" download>Descargar PDF ↓</a></article>
-</div><p class="empty" id="empty">No se encontraron cursos. Prueba con otra palabra.</p></section>
-<section class="section wrap columns">
-<div id="tienda"><h2>🛒 Tienda</h2><p class="sub">Explora productos digitales y materiales para llevar tu aprendizaje al siguiente nivel.</p><div class="product"><span class="tag">CATÁLOGO DEMO</span><b>Pack de cursos Dragon Cyber</b><p class="sub">Colección educativa en preparación. Los cursos de esta página son gratuitos por ahora.</p></div><p class="notice">Esta versión no procesa pagos ni cobra dinero; no introduzcas datos bancarios aquí.</p></div>
-<div id="recursos"><h2>▤ Recursos gratuitos</h2><p class="sub">Ideas para seguir aprendiendo.</p><ul class="mini-list"><li>Lista de comprobación para proteger tus cuentas</li><li>Glosario de conceptos de redes</li><li>Rutina de actualizaciones y copias de seguridad</li><li>Prácticas de programación para principiantes</li><li>Reglas para practicar hacking ético legalmente</li></ul></div>
-<div id="blog"><h2>▣ Blog / Novedades</h2><p class="sub">Lecturas breves para tu camino digital.</p><ul class="mini-list"><li><b>Cómo reconocer un mensaje sospechoso</b><br>Comprueba remitente, enlaces y urgencia antes de actuar.</li><li><b>Por qué actualizar tus dispositivos</b><br>Las actualizaciones corrigen errores y problemas de seguridad.</li><li><b>Primeros pasos en programación</b><br>Divide un problema grande en instrucciones pequeñas.</li><li><b>Cómo crear una página web</b><br>Empieza con HTML y CSS y prueba los cambios poco a poco.</li><li><b>Qué es la autenticación en dos pasos</b><br>Añade una capa extra de protección a tus cuentas.</li><li><b>Practicar Linux con seguridad</b><br>Usa una carpeta de pruebas y verifica cada comando antes de ejecutarlo.</li></ul></div>
+<section class="hero" id="inicio">
+  <h1>Domina el mundo <span class="green">digital</span></h1>
+  <p>Aprende paso a paso con nuestra academia de programación y ciberseguridad ética.</p>
+  <a class="download" href="#cursos">Explorar cursos ↓</a>
 </section>
-<section class="section wrap" id="nosotros"><div class="about"><div><h2>Sobre Dragon Cyber</h2><p class="sub">Somos un proyecto educativo para acercar la tecnología, la programación y la seguridad digital a quienes quieren aprender desde cero.</p><p>La idea es crecer con nuevas guías, ejemplos y recursos. Aprende a tu ritmo y practica siempre en tus propios equipos o con autorización.</p><a class="btn" href="#cursos">Empezar a aprender →</a></div><div class="aboutbox"><div class="dragon" style="font-size:48px">🐉</div><h3>Aprende a tu ritmo</h3><p class="sub">Guías descargables · Recursos educativos · Seguridad responsable</p></div></div></section>
+<p class="notice">🎓 Todos los cursos son gratuitos para descargar. Los precios de la tienda son ficticios: no se cobra dinero ni se solicitan datos bancarios.</p>
+
+<h2 id="cursos">📚 Cursos gratuitos</h2>
+<div class="grid" id="courseGrid"></div>
+
+<h2 id="tienda">🛍️ Tienda de demostración</h2>
+<p>Los precios sirven únicamente para probar el carrito.</p>
+<div class="grid" id="shopGrid"></div>
+
+<section id="carrito">
+  <h2>🛒 Tu carrito</h2>
+  <ul id="cartItems"><li>Tu carrito está vacío.</li></ul>
+  <h3>Total ficticio: <span class="green" id="total">0,00 €</span></h3>
+  <button class="add" onclick="checkout()">Finalizar compra simulada</button>
+  <button class="secondary" onclick="clearCart()">Vaciar carrito</button>
+  <p id="message" aria-live="polite"></p>
+</section>
 </main>
-<footer><div class="wrap foot"><div><b>🐉 DRAGON CYBER</b><br>Aprende · Protege · Construye</div><div><a href="#inicio">Inicio</a> · <a href="#cursos">Cursos</a> · <a href="#recursos">Recursos</a> · <a href="#nosotros">Sobre nosotros</a></div><div>© 2026 Dragon Cyber · Proyecto educativo</div></div><div class="wrap notice">Contenido introductorio con fines educativos. El diseño no incluye pagos reales, cuentas de usuario ni certificados oficiales.</div></footer>
+<footer>🐉 Dragon Cyber · Academia educativa · Practica siempre de forma ética y legal.</footer>
 <script>
-const search = document.getElementById('search');
-const cards = [...document.querySelectorAll('#courseGrid .card')];
-const empty = document.getElementById('empty');
-search.addEventListener('input', () => {
- const q = search.value.toLowerCase().trim(); let visible = 0;
- cards.forEach(card => { const show = (card.innerText + ' ' + card.dataset.search).toLowerCase().includes(q); card.style.display = show ? '' : 'none'; if(show) visible++; });
- empty.style.display = visible ? 'none' : 'block';
-});
+const courses = [
+ {id:1,title:"Ciberseguridad nivel 1",desc:"Conceptos básicos para proteger dispositivos y sistemas.",file:"ciberseguridad-nivel-1.pdf",price:4.99},
+ {id:2,title:"Programación nivel 1",desc:"Empieza a comprender la lógica de programación.",file:"programacion-nivel-1.pdf",price:3.99},
+ {id:3,title:"Hacking ético nivel 1",desc:"Introducción a las pruebas de seguridad autorizadas.",file:"hacking-etico-nivel-1.pdf",price:5.99},
+ {id:4,title:"Redes nivel 1",desc:"Aprende los fundamentos de las redes informáticas.",file:"redes-nivel-1.pdf",price:3.49},
+ {id:5,title:"Linux nivel 1",desc:"Primeros pasos con el sistema Linux.",file:"linux-nivel-1.pdf",price:3.99},
+ {id:6,title:"Privacidad digital",desc:"Mejora tu privacidad y seguridad en internet.",file:"privacidad-digital-nivel-1.pdf",price:2.99},
+ {id:7,title:"Python desde cero",desc:"Conoce los fundamentos del lenguaje Python.",file:"python-desde-cero.pdf",price:4.49},
+ {id:8,title:"Desarrollo web HTML y CSS",desc:"Aprende cómo se construyen páginas web.",file:"desarrollo-web-html-css.pdf",price:4.99},
+ {id:9,title:"Seguridad de cuentas y contraseñas",desc:"Buenas prácticas para proteger tus cuentas.",file:"seguridad-cuentas-contrasenas.pdf",price:2.49},
+ {id:10,title:"Linux intermedio",desc:"Continúa aprendiendo comandos y herramientas.",file:"linux-intermedio.pdf",price:5.49},
+ {id:11,title:"Laboratorio de ciberseguridad ética",desc:"Practica conceptos en entornos autorizados.",file:"laboratorio-ciberseguridad-etica.pdf",price:6.99}
+];
+let cart = [];
+const money = n => n.toLocaleString("es-ES",{style:"currency",currency:"EUR"});
+
+function render(){
+ document.getElementById("courseGrid").innerHTML = courses.map(c => `
+ <article class="card"><h3>${c.title}</h3><p>${c.desc}</p>
+ <a class="download" href="cursos/${c.file}" download>📥 Descargar gratis</a></article>`).join("");
+
+ document.getElementById("shopGrid").innerHTML = courses.map(c => `
+ <article class="card"><h3>${c.title}</h3><p>${c.desc}</p>
+ <div class="price">${money(c.price)}</div>
+ <button class="add" onclick="addToCart(${c.id})">Añadir al carrito</button></article>`).join("");
+ renderCart();
+}
+function addToCart(id){
+ cart.push(id);
+ document.getElementById("message").textContent="Curso añadido al carrito.";
+ renderCart();
+}
+function removeOne(id){
+ const index=cart.indexOf(id);
+ if(index>=0) cart.splice(index,1);
+ renderCart();
+}
+function clearCart(){
+ cart=[];
+ document.getElementById("message").textContent="Carrito vacío.";
+ renderCart();
+}
+function renderCart(){
+ document.getElementById("count").textContent=cart.length;
+ const list=document.getElementById("cartItems");
+ if(!cart.length){list.innerHTML="<li>Tu carrito está vacío.</li>";}
+ else{
+  list.innerHTML=cart.map((id,index)=>{
+   const c=courses.find(x=>x.id===id);
+   return `<li>${c.title} — ${money(c.price)}
+   <button class="remove" onclick="removeOne(${id})" aria-label="Quitar ${c.title}">Quitar</button></li>`;
+  }).join("");
+ }
+ document.getElementById("total").textContent=money(cart.reduce((sum,id)=>sum+courses.find(c=>c.id===id).price,0));
+}
+function checkout(){
+ const message=document.getElementById("message");
+ if(!cart.length){message.textContent="Añade un curso antes de finalizar.";return;}
+ message.textContent="✅ ¡Compra de demostración completada! No se ha realizado ningún pago. Puedes descargar todos los cursos gratis desde la sección Cursos.";
+}
+render();
 </script>
-</body></html>
+</body>
+</html>
+```
