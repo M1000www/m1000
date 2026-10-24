@@ -1,593 +1,680 @@
 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Dragon Cyber: aprende programación, tecnología y ciberseguridad ética.">
-<title>Dragon Cyber | Aprende · Protege · Construye</title>
-
+<title>DaniShop | Ofertas para todos</title>
 <style>
 :root {
-  --bg: #030914;
-  --panel: #071426;
-  --blue: #08a9ff;
-  --cyan: #00d5ff;
-  --text: #eaf5ff;
-  --muted: #a8bed2;
-  --line: #12395b;
+  --orange: #ff6a00;
+  --orange2: #ff8a00;
+  --dark: #202124;
+  --muted: #707782;
+  --bg: #f5f6f8;
+  --white: #fff;
+  --green: #159447;
 }
-
 * { box-sizing: border-box; }
-
-html { scroll-behavior: smooth; }
-
 body {
   margin: 0;
-  background: radial-gradient(ellipse at 80% 0%, #082b50 0%, transparent 38%), var(--bg);
-  color: var(--text);
   font-family: Arial, Helvetica, sans-serif;
-  line-height: 1.6;
+  color: var(--dark);
+  background: var(--bg);
 }
-
-a { color: inherit; text-decoration: none; }
-
-.wrap { width: min(1180px, 92%); margin: auto; }
-
+button, input { font: inherit; }
+button { cursor: pointer; }
+.topbar {
+  padding: 9px 5%;
+  background: #202124;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 13px;
+}
 header {
+  background: white;
   position: sticky;
   top: 0;
   z-index: 10;
-  background: #020812ed;
-  border-bottom: 1px solid var(--line);
+  box-shadow: 0 2px 8px #0000000c;
 }
-
-.nav {
+.head {
+  max-width: 1400px;
+  margin: auto;
+  padding: 17px 4%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 18px;
-  padding: 17px 0;
+  gap: 22px;
 }
-
-.brand {
+.logo {
+  color: var(--orange);
   font-weight: 900;
-  font-size: 23px;
-  letter-spacing: 1px;
+  font-size: 29px;
+  letter-spacing: -1px;
+  white-space: nowrap;
 }
-
-.brand span { color: var(--blue); }
-
-nav { display: flex; flex-wrap: wrap; gap: 16px; font-size: 14px; }
-
-nav a:hover { color: var(--cyan); }
-
+.logo span { color: #252525; }
 .search {
-  max-width: 100%;
-  padding: 10px 13px;
-  background: #020a14;
-  border: 1px solid #17476c;
-  border-radius: 24px;
+  flex: 1;
+  display: flex;
+  border: 2px solid #e2e4e8;
+  border-radius: 30px;
+  overflow: hidden;
+  background: white;
+}
+.search input {
+  border: none;
+  outline: none;
+  padding: 13px 18px;
+  width: 100%;
+  min-width: 0;
+}
+.search button {
+  border: none;
   color: white;
+  background: var(--orange);
+  padding: 0 22px;
 }
-
-.hero {
-  padding: 65px 0;
-  border-bottom: 1px solid var(--line);
-  background: linear-gradient(120deg, #06182b99, transparent);
-}
-
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1.2fr .8fr;
-  gap: 35px;
-  align-items: center;
-}
-
-.eyebrow {
-  color: #91cfff;
-  letter-spacing: 4px;
-  font-size: 12px;
-  text-transform: uppercase;
-}
-
-h1 {
-  font-size: clamp(42px, 6vw, 72px);
-  line-height: 1;
-  margin: 15px 0;
-}
-
-h1 span, .blue { color: var(--blue); }
-
-.hero p { font-size: 18px; color: #c1d8e9; }
-
-.hero-art {
-  text-align: center;
-  padding: 30px;
-  border: 1px solid #17476c;
-  border-radius: 20px;
-  background: linear-gradient(145deg, #071a2c, #030914);
-  box-shadow: 0 0 35px #008cff15;
-}
-
-.bigdragon {
-  font-size: 90px;
-  filter: drop-shadow(0 0 20px #008cff66);
-}
-
-.btn {
-  display: inline-block;
-  padding: 11px 17px;
-  border-radius: 10px;
-  border: 1px solid var(--blue);
+.head-action {
+  border: none;
   background: transparent;
-  color: var(--text);
   font-weight: bold;
-  cursor: pointer;
-  margin: 4px;
+  white-space: nowrap;
 }
-
-.btn.primary {
-  background: linear-gradient(120deg, #0878d1, #08a9ff);
-  border: 0;
+nav {
+  display: flex;
+  gap: 25px;
+  padding: 0 4% 13px;
+  max-width: 1400px;
+  margin: auto;
+  overflow-x: auto;
+}
+nav a {
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  white-space: nowrap;
+}
+nav a:hover { color: var(--orange); }
+main {
+  max-width: 1400px;
+  margin: auto;
+  padding: 18px 3%;
+}
+.hero {
+  background: linear-gradient(115deg, #ff6100, #ff9b00);
+  border-radius: 15px;
   color: white;
-}
-
-.btn:hover { filter: brightness(1.2); }
-
-.features {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  padding-top: 25px;
-  padding-bottom: 25px;
-}
-
-.feature {
-  padding: 16px;
-  background: #071426;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-}
-
-.feature b { display: block; color: var(--cyan); }
-
-.section { padding-top: 35px; padding-bottom: 25px; }
-
-.section-head {
+  padding: 42px 5%;
+  min-height: 235px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 15px;
+  gap: 20px;
+  overflow: hidden;
 }
-
-.sub { color: var(--muted); }
-
-.tag { color: var(--cyan); font-size: 12px; }
-
-.grid {
+.hero h1 {
+  font-size: clamp(30px, 4vw, 52px);
+  margin: 0 0 12px;
+  line-height: 1.05;
+}
+.hero p { font-size: 18px; margin: 0 0 20px; }
+.hero button {
+  background: white;
+  color: var(--orange);
+  border: none;
+  border-radius: 25px;
+  padding: 12px 24px;
+  font-weight: bold;
+}
+.hero-art {
+  font-size: clamp(65px, 11vw, 125px);
+  text-align: center;
+  min-width: 25%;
+}
+.notice {
+  background: #fff3e8;
+  border: 1px solid #ffd8bb;
+  padding: 12px 16px;
+  margin: 16px 0;
+  border-radius: 9px;
+  font-size: 13px;
+  color: #8b4200;
+}
+.categories {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(75px, 1fr));
+  gap: 12px;
+  margin: 25px 0 30px;
+}
+.category {
+  border: 1px solid #eee;
+  background: white;
+  border-radius: 12px;
+  padding: 14px 6px;
+  text-align: center;
+  transition: .2s;
+}
+.category:hover {
+  border-color: var(--orange);
+  transform: translateY(-2px);
+}
+.category div { font-size: 30px; margin-bottom: 8px; }
+.category span { font-size: 12px; }
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin: 27px 0 16px;
+}
+.section-title h2 { margin: 0; font-size: 24px; }
+.section-title span { color: var(--orange); font-size: 13px; }
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 290px;
+  align-items: start;
+  gap: 22px;
+}
+.products {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+.card {
+  background: white;
+  border: 1px solid #e9eaed;
+  border-radius: 11px;
+  padding: 10px;
+  min-width: 0;
+  transition: box-shadow .2s, transform .2s;
+}
+.card:hover {
+  box-shadow: 0 5px 20px #00000012;
+  transform: translateY(-2px);
+}
+.product-image {
+  height: 155px;
+  border-radius: 8px;
+  background: #f1f2f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 65px;
+  overflow: hidden;
+}
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.badge {
+  display: inline-block;
+  background: var(--orange);
+  color: white;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 5px 7px;
+  border-radius: 5px;
+  margin: 10px 0 6px;
+}
+.card h3 {
+  font-size: 14px;
+  line-height: 1.4;
+  min-height: 39px;
+  margin: 3px 0;
+}
+.rating { color: #ff9a00; font-size: 13px; }
+.rating small { color: #7b818b; }
+.price-row { margin: 9px 0 4px; }
+.price {
+  color: #ef4c13;
+  font-weight: 800;
+  font-size: 20px;
+}
+.old-price {
+  color: #858585;
+  font-size: 12px;
+  text-decoration: line-through;
+  margin-left: 5px;
+}
+.shipping { font-size: 11px; color: #7b818b; margin: 7px 0; }
+.add-btn {
+  width: 100%;
+  border: none;
+  border-radius: 22px;
+  background: linear-gradient(90deg, #ff6a00, #ff8500);
+  color: white;
+  font-weight: bold;
+  padding: 10px 5px;
+  margin-top: 5px;
+  font-size: 12px;
+}
+.add-btn:hover { filter: brightness(.95); }
+.cart {
+  background: white;
+  border: 1px solid #e2e4e8;
+  border-radius: 12px;
+  padding: 17px;
+  position: sticky;
+  top: 145px;
+}
+.cart h2 { font-size: 20px; margin: 0 0 14px; }
+.cart-empty { color: var(--muted); font-size: 14px; padding: 20px 0; }
+.cart-item {
+  display: grid;
+  grid-template-columns: 52px minmax(0,1fr);
+  gap: 10px;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+.cart-thumb {
+  width: 52px;
+  height: 52px;
+  background: #f1f2f4;
+  border-radius: 7px;
+  display: grid;
+  place-items: center;
+  font-size: 27px;
+}
+.cart-name { font-size: 12px; line-height: 1.35; }
+.cart-price { font-weight: bold; font-size: 13px; margin-top: 5px; }
+.quantity {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 7px;
+}
+.quantity button {
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  background: white;
+  width: 25px;
+  height: 25px;
+}
+.remove {
+  float: right;
+  border: none;
+  background: none;
+  color: #888;
+}
+.summary { margin-top: 17px; font-size: 13px; }
+.summary div {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+.summary .total {
+  font-size: 18px;
+  font-weight: bold;
+  border-top: 1px solid #eee;
+  padding-top: 13px;
+}
+.checkout {
+  width: 100%;
+  border: none;
+  border-radius: 7px;
+  padding: 13px 8px;
+  background: var(--orange);
+  color: white;
+  font-weight: bold;
+  margin-top: 10px;
+}
+.checkout:disabled { background: #bbb; cursor: not-allowed; }
+.demo-note {
+  background: #eef6ff;
+  color: #20538a;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 12px;
+  line-height: 1.5;
+  margin-top: 13px;
+}
+.benefits {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
+  background: white;
+  border-radius: 12px;
+  margin: 30px 0;
+  padding: 22px;
+  gap: 15px;
 }
-
-.card {
-  padding: 20px;
-  border-radius: 14px;
-  border: 1px solid var(--line);
-  background: linear-gradient(145deg, #091a2e, #050d19);
-  transition: transform .2s, border-color .2s;
-}
-
-.card:hover {
-  transform: translateY(-4px);
-  border-color: var(--blue);
-}
-
-.icon { font-size: 32px; }
-
-.card h3 { margin-bottom: 8px; }
-
-.card p { color: var(--muted); font-size: 14px; }
-
-.meta { color: #80bfe8; font-size: 12px; margin: 12px 0; }
-
-.price { color: var(--cyan); font-size: 24px; font-weight: bold; }
-
-.notice {
-  padding: 15px;
-  margin: 20px 0;
-  border: 1px solid #14527a;
-  background: #06182b;
-  border-radius: 10px;
-  color: #b8d9f0;
-}
-
-.columns {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-
-.product, #cart {
-  background: #071426;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  padding: 20px;
-}
-
-#cartItems { padding-left: 20px; }
-
-#cartItems li { margin-bottom: 12px; }
-
-.remove {
-  background: #16314b;
-  color: white;
-  border: 1px solid #245477;
-  border-radius: 7px;
-  padding: 6px 10px;
-  cursor: pointer;
-}
-
+.benefit { display: flex; align-items: center; gap: 12px; }
+.benefit-icon { font-size: 28px; }
+.benefit strong { display: block; font-size: 13px; }
+.benefit small { color: var(--muted); font-size: 11px; }
 footer {
-  margin-top: 40px;
-  border-top: 1px solid var(--line);
-  padding: 28px 0;
-  color: #9fb7cc;
-  font-size: 13px;
+  background: #202124;
+  color: white;
+  padding: 30px 5%;
 }
-
-.foot {
+.footer-inner {
+  max-width: 1300px;
+  margin: auto;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 15px;
+  gap: 20px;
 }
-
-.empty { display: none; color: var(--muted); }
-
-@media (max-width: 850px) {
-  .hero-grid, .columns { grid-template-columns: 1fr; }
-  .grid { grid-template-columns: repeat(2, 1fr); }
-  .features { grid-template-columns: repeat(2, 1fr); }
+footer p { color: #c4c4c4; font-size: 13px; line-height: 1.6; }
+footer a { color: white; text-decoration: none; margin-right: 12px; font-size: 13px; }
+footer a:hover { color: #ff9a00; }
+.no-results {
+  grid-column: 1/-1;
+  background: white;
+  padding: 35px;
+  text-align: center;
+  border-radius: 10px;
 }
-
-@media (max-width: 560px) {
-  .grid, .features { grid-template-columns: 1fr; }
-  .hero { padding: 40px 0; }
-  nav { gap: 11px; }
+@media (max-width: 1050px) {
+  .layout { grid-template-columns: 1fr; }
+  .cart { position: static; }
+  .products { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .categories { grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 650px) {
+  .topbar { justify-content: center; font-size: 11px; }
+  .topbar span:nth-child(2) { display: none; }
+  .head { flex-wrap: wrap; gap: 12px; padding: 13px 4%; }
+  .logo { font-size: 25px; }
+  .search { order: 3; flex-basis: 100%; }
+  .head-action { margin-left: auto; font-size: 12px; }
+  nav { gap: 18px; }
+  main { padding: 12px 3%; }
+  .hero { min-height: 200px; padding: 25px 6%; }
+  .hero p { font-size: 14px; }
+  .hero-art { font-size: 55px; min-width: auto; }
+  .categories { grid-template-columns: repeat(4, 1fr); gap: 7px; }
+  .category { padding: 10px 3px; }
+  .category div { font-size: 25px; }
+  .category span { font-size: 10px; }
+  .products { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+  .product-image { height: 125px; font-size: 50px; }
+  .card { padding: 7px; }
+  .card h3 { font-size: 12px; }
+  .price { font-size: 17px; }
+  .old-price { font-size: 10px; }
+  .section-title h2 { font-size: 20px; }
+  .benefits { grid-template-columns: 1fr; padding: 17px; }
 }
 </style>
 </head>
-
 <body>
 
-<header>
-  <div class="wrap nav">
-    <a class="brand" href="#inicio">🐉 DRAGON <span>CYBER</span></a>
-
-    <nav>
-      <a href="#inicio">Inicio</a>
-      <a href="#cursos">Cursos</a>
-      <a href="#tienda">Tienda</a>
-      <a href="#recursos">Recursos</a>
-      <a href="#blog">Blog</a>
-      <a href="#nosotros">Nosotros</a>
-      <a href="#carrito">🛒 Carrito (<span id="count">0</span>)</a>
-    </nav>
-
-    <input id="search" class="search" type="search" placeholder="Buscar cursos...">
-  </div>
-</header>
-
-<main>
-
-<section class="hero" id="inicio">
-  <div class="wrap hero-grid">
-    <div>
-      <div class="eyebrow">Aprende · Protege · Construye</div>
-      <h1>DRAGON <span>CYBER</span></h1>
-      <p>Tu portal de formación en ciberseguridad, programación y tecnología. Aprende a tu ritmo, desde cualquier lugar.</p>
-      <a class="btn primary" href="#cursos">Explorar cursos →</a>
-      <a class="btn" href="#tienda">Ver tienda</a>
-      <p class="sub">Cursos en PDF · Descarga directa · Acceso gratuito</p>
-    </div>
-
-    <div class="hero-art">
-      <div class="bigdragon">🐉</div>
-      <h2>Tu futuro digital empieza aquí</h2>
-      <p>Aprende tecnología de forma responsable.</p>
-    </div>
-  </div>
-</section>
-
-<div class="wrap features">
-  <div class="feature">⬡ <b>Cursos en PDF</b>Descarga y estudia sin conexión.</div>
-  <div class="feature">⚡ <b>Acceso inmediato</b>Empieza a aprender hoy.</div>
-  <div class="feature">▱ <b>Multidispositivo</b>PC, móvil o tablet.</div>
-  <div class="feature">✧ <b>Seguridad responsable</b>Practica con autorización.</div>
+<div class="topbar">
+  <span>🚚 Envío gratis en pedidos de demostración</span>
+  <span>↩️ Devoluciones simuladas</span>
+  <span>🔒 Sin pagos reales</span>
 </div>
 
-<section class="section wrap" id="cursos">
-  <div class="section-head">
+<header>
+  <div class="head">
+    <div class="logo">Dani<span>Shop</span> 🛍️</div>
+    <form class="search" id="searchForm">
+      <input id="searchInput" type="search" placeholder="Buscar productos..." aria-label="Buscar productos">
+      <button type="submit" aria-label="Buscar">🔍</button>
+    </form>
+    <button class="head-action" onclick="document.getElementById('productsSection').scrollIntoView({behavior:'smooth'})">📦 Productos</button>
+    <button class="head-action" onclick="document.getElementById('cart').scrollIntoView({behavior:'smooth'})">🛒 Carrito <span id="cartCount">0</span></button>
+  </div>
+  <nav>
+    <a href="#inicio">Inicio</a>
+    <a href="#ofertas">Ofertas</a>
+    <a href="#productsSection">Más vendidos</a>
+    <a href="#productsSection" data-category="Tecnología">Tecnología</a>
+    <a href="#productsSection" data-category="Hogar">Hogar y cocina</a>
+    <a href="#productsSection" data-category="Moda">Moda</a>
+    <a href="#productsSection" data-category="Deportes">Deportes</a>
+    <a href="#productsSection" data-category="Accesorios">Accesorios</a>
+  </nav>
+</header>
+
+<main id="inicio">
+  <section class="hero" id="ofertas">
     <div>
-      <h2>📚 Nuestros cursos</h2>
-      <p class="sub">Guías descargables para aprender desde cero.</p>
+      <h1>¡Ofertas increíbles<br>todos los días!</h1>
+      <p>Descubre productos geniales a precios de demostración.</p>
+      <button onclick="document.getElementById('productsSection').scrollIntoView({behavior:'smooth'})">Explorar productos →</button>
     </div>
-    <span class="tag">11 CURSOS</span>
+    <div class="hero-art">🎧 ⌚ 🎁</div>
+  </section>
+
+  <div class="notice">
+    ℹ️ <strong>DaniShop es una tienda de simulación.</strong>
+    Los precios son ejemplos. No se realizan compras reales, cobros ni envíos.
   </div>
 
-  <div class="grid" id="courseGrid">
+  <section class="categories" aria-label="Categorías">
+    <button class="category" onclick="filterCategory('Tecnología')"><div>📱</div><span>Tecnología</span></button>
+    <button class="category" onclick="filterCategory('Hogar')"><div>🏠</div><span>Hogar</span></button>
+    <button class="category" onclick="filterCategory('Moda')"><div>👕</div><span>Moda</span></button>
+    <button class="category" onclick="filterCategory('Accesorios')"><div>💍</div><span>Accesorios</span></button>
+    <button class="category" onclick="filterCategory('Deportes')"><div>⚽</div><span>Deportes</span></button>
+    <button class="category" onclick="filterCategory('Juguetes')"><div>🧸</div><span>Juguetes</span></button>
+    <button class="category" onclick="filterCategory('Belleza')"><div>🧴</div><span>Belleza</span></button>
+    <button class="category" onclick="filterCategory('Todos')"><div>☷</div><span>Ver todo</span></button>
+  </section>
 
-    <article class="card" data-search="ciberseguridad seguridad phishing privacidad">
-      <div class="icon">🛡️</div>
-      <h3>Ciberseguridad · Nivel 1</h3>
-      <p>Fundamentos de seguridad digital, contraseñas y protección de dispositivos.</p>
-      <div class="meta">PDF · Guía inicial</div>
-      <a class="btn primary" href="cursos/ciberseguridad-nivel-1.pdf" download>Descargar PDF ↓</a>
-    </article>
-
-    <article class="card" data-search="programacion codigo logica">
-      <div class="icon">⌘</div>
-      <h3>Programación · Nivel 1</h3>
-      <p>Aprende lógica, variables, condiciones y bucles.</p>
-      <div class="meta">PDF · Guía inicial</div>
-      <a class="btn primary" href="cursos/programacion-nivel-1.pdf" download>Descargar PDF ↓</a>
-    </article>
-
-    <article class="card" data-search="hacking etico seguridad autorizado">
-      <div class="icon">🧑‍💻</div>
-      <h3>Hacking ético · Nivel 1</h3>
-      <p>Introducción a las pruebas de seguridad autorizadas.</p>
-      <div class="meta">PDF · Guía inicial</div>
-      <a class="btn primary" href="cursos/hacking-etico-nivel-1.pdf" download>Descargar PDF ↓</a>
-    </article>
-
-    <article class="card" data-search="redes internet conexiones">
-      <div class="icon">🌐</div>
-      <h3>Redes · Nivel 1</h3>
-      <p>Conoce los fundamentos de las redes informáticas.</p>
-      <div class="meta">PDF · Guía inicial</div>
-      <a class="btn primary" href="cursos/redes-nivel-1.pdf" download>Descargar PDF ↓</a>
-    </article>
-
-    <article class="card" data-search="linux sistema operativo comandos">
-      <div class="icon">🐧</div>
-      <h3>Linux · Nivel 1</h3>
-      <p>Primeros pasos con Linux y la terminal.</p>
-      <div class="meta">PDF · Guía inicial</div>
-      <a class="btn primary" href="cursos/linux-nivel-1.pdf" download>Descargar PDF ↓</a>
-    </article>
-
-    <article class="card" data-search="privacidad digital internet datos">
-      <div class="icon">🔐</div>
-      <h3>Privacidad digital</h3>
-      <p>Aprende a proteger tus datos personales en internet.</p>
-      <div class="meta">PDF · Guía inicial</div>
-      <a class="btn primary" href="cursos/privacidad-digital-nivel-1.pdf" download>Descargar PDF ↓</a>
-    </article>
-
-    <article class="card" data-search="python programacion variables">
-      <div class="icon">🐍</div>
-      <h3>Python desde cero</h3>
-      <p>Variables, condiciones, bucles y funciones.</p>
-      <div class="meta">PDF · Nuevo curso</div>
-      <a class="btn primary" href="cursos/python-desde-cero.pdf" download>Descargar PDF ↓</a>
-    </article>
-
-    <article class="card" data-search="desarrollo web html css paginas">
-      <div class="icon">🖥️</div>
-      <h3>Desarrollo web con HTML y CSS</h3>
-      <p>Aprende a construir páginas web con estilos.</p>
-      <div class="meta">PDF · Nuevo curso</div>
-      <a class="btn primary" href="cursos/desarrollo-web-html-css.pdf" download>Descargar PDF ↓</a>
-    </article>
-
-    <article class="card" data-search="cuentas contraseñas autenticacion">
-      <div class="icon">🔑</div>
-      <h3>Seguridad de cuentas</h3>
-      <p>Protege tus cuentas con buenas prácticas de seguridad.</p>
-      <div class="meta">PDF · Nuevo curso</div>
-      <a class="btn primary" href="cursos/seguridad-cuentas-contrasenas.pdf" download>Descargar PDF ↓</a>
-    </article>
-
-    <article class="card" data-search="linux intermedio terminal permisos">
-      <div class="icon">⚙️</div>
-      <h3>Linux intermedio</h3>
-      <p>Practica comandos, permisos y procesos.</p>
-      <div class="meta">PDF · Nuevo curso</div>
-      <a class="btn primary" href="cursos/linux-intermedio.pdf" download>Descargar PDF ↓</a>
-    </article>
-
-    <article class="card" data-search="laboratorio ciberseguridad etica practicas">
-      <div class="icon">🔬</div>
-      <h3>Laboratorio de ciberseguridad ética</h3>
-      <p>Aprende a practicar en entornos autorizados.</p>
-      <div class="meta">PDF · Nuevo curso</div>
-      <a class="btn primary" href="cursos/laboratorio-ciberseguridad-etica.pdf" download>Descargar PDF ↓</a>
-    </article>
-
-  </div>
-  <p class="empty" id="empty">No se encontraron cursos. Prueba con otra palabra.</p>
-</section>
-
-<section class="section wrap columns">
-  <div id="tienda">
-    <h2>🛍️ Tienda de demostración</h2>
-    <p class="sub">Añade cursos al carrito para probar la tienda. Los precios son ficticios.</p>
-    <div class="grid" id="shopGrid"></div>
-    <div class="notice">Esta tienda es una demostración. No cobra dinero ni solicita datos bancarios. Los cursos se pueden descargar gratis.</div>
-  </div>
-
-  <div id="carrito">
-    <h2>🛒 Tu carrito</h2>
-    <div id="cart">
-      <p id="emptyCart">Todavía no has añadido cursos.</p>
-      <ul id="cartItems"></ul>
-      <h3>Total: <span class="blue" id="total">0,00 €</span></h3>
-      <button class="btn primary" onclick="checkout()">Finalizar compra simulada</button>
-      <button class="btn" onclick="clearCart()">Vaciar carrito</button>
-      <p id="message" aria-live="polite"></p>
+  <section id="productsSection">
+    <div class="section-title">
+      <h2 id="productHeading">Productos destacados</h2>
+      <span>✨ Ofertas de demostración</span>
     </div>
-  </div>
-</section>
 
-<section class="section wrap" id="recursos">
-  <h2>🧰 Recursos</h2>
-  <div class="product">
-    <h3>Consejos para aprender tecnología</h3>
-    <p class="sub">Practica poco a poco, toma notas y trabaja siempre en tus propios dispositivos o en laboratorios autorizados.</p>
-  </div>
-</section>
+    <div class="layout">
+      <div class="products" id="productGrid"></div>
 
-<section class="section wrap" id="blog">
-  <h2>📰 Blog</h2>
-  <div class="grid">
-    <article class="card">
-      <h3>Cómo reconocer mensajes sospechosos</h3>
-      <p>Comprueba el remitente, los enlaces y las solicitudes urgentes antes de actuar.</p>
-    </article>
-    <article class="card">
-      <h3>Por qué actualizar tus dispositivos</h3>
-      <p>Las actualizaciones pueden corregir fallos y mejorar la seguridad.</p>
-    </article>
-    <article class="card">
-      <h3>Primeros pasos en programación</h3>
-      <p>Divide los problemas grandes en instrucciones pequeñas.</p>
-    </article>
-  </div>
-</section>
+      <aside class="cart" id="cart">
+        <h2>🛒 Tu carrito (<span id="cartTitleCount">0</span>)</h2>
+        <div id="cartItems"><div class="cart-empty">Tu carrito está vacío. ¡Añade algún producto!</div></div>
+        <div class="summary">
+          <div><span>Subtotal</span><strong id="subtotal">0,00 €</strong></div>
+          <div><span>Envío simulado</span><strong id="shipping">0,00 €</strong></div>
+          <div class="total"><span>Total</span><span id="total">0,00 €</span></div>
+        </div>
+        <button class="checkout" id="checkoutButton" onclick="checkout()" disabled>Finalizar compra (simulación)</button>
+        <div class="demo-note">
+          🛡️ <strong>Compra 100 % ficticia.</strong><br>
+          No se te cobrará nada. No introduzcas datos bancarios ni personales.
+        </div>
+      </aside>
+    </div>
+  </section>
 
-<section class="section wrap columns" id="nosotros">
-  <div>
-    <h2>Sobre Dragon Cyber</h2>
-    <p class="sub">Un proyecto educativo para acercar la programación, la tecnología y la ciberseguridad ética a quienes quieren aprender desde cero.</p>
-    <a class="btn primary" href="#cursos">Empezar a aprender →</a>
-  </div>
-  <div class="hero-art">
-    <div class="bigdragon">🐉</div>
-    <h3>Aprende a tu ritmo</h3>
-    <p class="sub">Guías descargables · Recursos educativos · Seguridad responsable</p>
-  </div>
-</section>
-
+  <section class="benefits">
+    <div class="benefit"><span class="benefit-icon">🚚</span><div><strong>Envío de demostración</strong><small>Sin envíos reales</small></div></div>
+    <div class="benefit"><span class="benefit-icon">🔐</span><div><strong>Compra segura para practicar</strong><small>Sin pagos ni datos bancarios</small></div></div>
+    <div class="benefit"><span class="benefit-icon">💬</span><div><strong>Atención de prueba</strong><small>Una tienda para experimentar</small></div></div>
+  </section>
 </main>
 
 <footer>
-  <div class="wrap foot">
-    <b>🐉 DRAGON CYBER</b>
-    <span>Aprende · Protege · Construye</span>
-    <span>© 2026 Dragon Cyber · Proyecto educativo</span>
+  <div class="footer-inner">
+    <div>
+      <div class="logo" style="color:#ff8a00">DaniShop 🛍️</div>
+      <p>Grandes ideas, pequeños precios.<br>Esta web es una simulación educativa.</p>
+    </div>
+    <div>
+      <strong>Información</strong>
+      <p><a href="#inicio">Inicio</a><a href="#productsSection">Productos</a><a href="#ofertas">Ofertas</a></p>
+      <p>© <span id="year"></span> DaniShop · Proyecto de demostración</p>
+    </div>
   </div>
 </footer>
 
 <script>
-const courses = [
-  {id:1,title:"Ciberseguridad · Nivel 1",file:"ciberseguridad-nivel-1.pdf",price:4.99},
-  {id:2,title:"Programación · Nivel 1",file:"programacion-nivel-1.pdf",price:3.99},
-  {id:3,title:"Hacking ético · Nivel 1",file:"hacking-etico-nivel-1.pdf",price:5.99},
-  {id:4,title:"Redes · Nivel 1",file:"redes-nivel-1.pdf",price:3.49},
-  {id:5,title:"Linux · Nivel 1",file:"linux-nivel-1.pdf",price:3.99},
-  {id:6,title:"Privacidad digital",file:"privacidad-digital-nivel-1.pdf",price:2.99},
-  {id:7,title:"Python desde cero",file:"python-desde-cero.pdf",price:4.49},
-  {id:8,title:"Desarrollo web con HTML y CSS",file:"desarrollo-web-html-css.pdf",price:4.99},
-  {id:9,title:"Seguridad de cuentas",file:"seguridad-cuentas-contrasenas.pdf",price:2.49},
-  {id:10,title:"Linux intermedio",file:"linux-intermedio.pdf",price:5.49},
-  {id:11,title:"Laboratorio de ciberseguridad ética",file:"laboratorio-ciberseguridad-etica.pdf",price:6.99}
+const products = [
+  {id:1, name:"Auriculares inalámbricos", category:"Tecnología", emoji:"🎧", price:14.99, old:29.99, rating:"4.8", reviews:"1.243", discount:50},
+  {id:2, name:"Reloj inteligente deportivo", category:"Tecnología", emoji:"⌚", price:19.99, old:39.99, rating:"4.7", reviews:"986", discount:50},
+  {id:3, name:"Lámpara LED para escritorio", category:"Hogar", emoji:"💡", price:12.49, old:24.99, rating:"4.6", reviews:"532", discount:50},
+  {id:4, name:"Mochila para uso diario", category:"Moda", emoji:"🎒", price:22.99, old:39.99, rating:"4.8", reviews:"784", discount:43},
+  {id:5, name:"Zapatillas deportivas", category:"Moda", emoji:"👟", price:29.99, old:49.99, rating:"4.5", reviews:"1.568", discount:40},
+  {id:6, name:"Botella térmica reutilizable", category:"Accesorios", emoji:"🧴", price:9.99, old:19.99, rating:"4.7", reviews:"623", discount:50},
+  {id:7, name:"Balón de fútbol", category:"Deportes", emoji:"⚽", price:16.99, old:26.99, rating:"4.6", reviews:"412", discount:37},
+  {id:8, name:"Teclado gaming RGB", category:"Tecnología", emoji:"⌨️", price:27.99, old:44.99, rating:"4.8", reviews:"1.017", discount:38},
+  {id:9, name:"Gafas de sol", category:"Accesorios", emoji:"🕶️", price:8.99, old:17.99, rating:"4.4", reviews:"356", discount:50},
+  {id:10, name:"Cojín decorativo", category:"Hogar", emoji:"🛋️", price:11.99, old:21.99, rating:"4.5", reviews:"289", discount:45},
+  {id:11, name:"Set de figuras de juguete", category:"Juguetes", emoji:"🧸", price:13.99, old:23.99, rating:"4.7", reviews:"643", discount:42},
+  {id:12, name:"Organizador de maquillaje", category:"Belleza", emoji:"🪞", price:10.99, old:18.99, rating:"4.6", reviews:"308", discount:42}
 ];
 
-let cart = [];
+let cart = {};
+let activeCategory = "Todos";
+let searchTerm = "";
 
-function money(value) {
-  return value.toLocaleString("es-ES", {
-    style: "currency",
-    currency: "EUR"
+const money = n => n.toLocaleString("es-ES", {
+  style:"currency", currency:"EUR"
+});
+
+function renderProducts() {
+  const grid = document.getElementById("productGrid");
+  const filtered = products.filter(p => {
+    const matchesCategory = activeCategory === "Todos" || p.category === activeCategory;
+    const matchesSearch = p.name.toLowerCase().includes(searchTerm) ||
+      p.category.toLowerCase().includes(searchTerm);
+    return matchesCategory && matchesSearch;
   });
-}
 
-function renderShop() {
-  document.getElementById("shopGrid").innerHTML = courses.map(course => `
+  document.getElementById("productHeading").textContent =
+    activeCategory === "Todos" ? "Productos destacados" : activeCategory;
+
+  if (!filtered.length) {
+    grid.innerHTML = '<div class="no-results">😕 No encontramos productos. Prueba con otra búsqueda.</div>';
+    return;
+  }
+
+  grid.innerHTML = filtered.map(p => `
     <article class="card">
-      <div class="icon">📘</div>
-      <h3>${course.title}</h3>
-      <div class="price">${money(course.price)}</div>
-      <button class="btn primary" onclick="addToCart(${course.id})">
-        Añadir al carrito
-      </button>
+      <div class="product-image" aria-label="${p.name}">${p.emoji}</div>
+      <span class="badge">-${p.discount}%</span>
+      <h3>${p.name}</h3>
+      <div class="rating">★★★★★ <small>(${p.reviews})</small></div>
+      <div class="price-row">
+        <span class="price">${money(p.price)}</span>
+        <span class="old-price">${money(p.old)}</span>
+      </div>
+      <div class="shipping">Precio de ejemplo · Sin envío real</div>
+      <button class="add-btn" onclick="addToCart(${p.id})">Añadir al carrito</button>
     </article>
   `).join("");
 }
 
+function filterCategory(category) {
+  activeCategory = category;
+  searchTerm = "";
+  document.getElementById("searchInput").value = "";
+  renderProducts();
+  document.getElementById("productsSection").scrollIntoView({behavior:"smooth"});
+}
+
 function addToCart(id) {
-  cart.push(id);
-  document.getElementById("message").textContent = "Curso añadido al carrito.";
+  cart[id] = (cart[id] || 0) + 1;
   renderCart();
 }
 
-function removeFromCart(index) {
-  cart.splice(index, 1);
+function changeQuantity(id, change) {
+  cart[id] = (cart[id] || 0) + change;
+  if (cart[id] <= 0) delete cart[id];
   renderCart();
 }
 
-function clearCart() {
-  cart = [];
-  document.getElementById("message").textContent = "Has vaciado el carrito.";
+function removeFromCart(id) {
+  delete cart[id];
   renderCart();
 }
 
 function renderCart() {
-  document.getElementById("count").textContent = cart.length;
-  document.getElementById("emptyCart").style.display = cart.length ? "none" : "block";
-
-  document.getElementById("cartItems").innerHTML = cart.map((id, index) => {
-    const course = courses.find(item => item.id === id);
-    return `<li>
-      ${course.title} — ${money(course.price)}
-      <button class="remove" onclick="removeFromCart(${index})">Quitar</button>
-    </li>`;
-  }).join("");
-
-  const total = cart.reduce((sum, id) => {
-    return sum + courses.find(item => item.id === id).price;
+  const entries = Object.entries(cart);
+  const count = entries.reduce((sum, [,qty]) => sum + qty, 0);
+  const subtotal = entries.reduce((sum, [id,qty]) => {
+    const p = products.find(item => item.id === Number(id));
+    return sum + p.price * qty;
   }, 0);
+  const shipping = subtotal > 0 && subtotal < 50 ? 2.99 : 0;
+  const cartItems = document.getElementById("cartItems");
 
-  document.getElementById("total").textContent = money(total);
-}
+  document.getElementById("cartCount").textContent = count;
+  document.getElementById("cartTitleCount").textContent = count;
+  document.getElementById("subtotal").textContent = money(subtotal);
+  document.getElementById("shipping").textContent = money(shipping);
+  document.getElementById("total").textContent = money(subtotal + shipping);
+  document.getElementById("checkoutButton").disabled = count === 0;
 
-function checkout() {
-  const message = document.getElementById("message");
-
-  if (!cart.length) {
-    message.textContent = "Añade algún curso antes de continuar.";
+  if (!entries.length) {
+    cartItems.innerHTML = '<div class="cart-empty">Tu carrito está vacío. ¡Añade algún producto!</div>';
     return;
   }
 
-  message.textContent =
-    "✅ Compra simulada completada. No se ha cobrado dinero. " +
-    "Puedes descargar los cursos gratis desde la sección Cursos.";
+  cartItems.innerHTML = entries.map(([id,qty]) => {
+    const p = products.find(item => item.id === Number(id));
+    return `
+      <div class="cart-item">
+        <div class="cart-thumb">${p.emoji}</div>
+        <div>
+          <button class="remove" onclick="removeFromCart(${p.id})" aria-label="Eliminar ${p.name}">✕</button>
+          <div class="cart-name">${p.name}</div>
+          <div class="cart-price">${money(p.price * qty)}</div>
+          <div class="quantity">
+            <button onclick="changeQuantity(${p.id},-1)" aria-label="Quitar uno">−</button>
+            <span>${qty}</span>
+            <button onclick="changeQuantity(${p.id},1)" aria-label="Añadir uno">+</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join("");
 }
 
-document.getElementById("search").addEventListener("input", event => {
-  const query = event.target.value.toLowerCase().trim();
-  let visible = 0;
+function checkout() {
+  const entries = Object.entries(cart);
+  if (!entries.length) {
+    alert("Tu carrito está vacío.");
+    return;
+  }
 
-  document.querySelectorAll("#courseGrid .card").forEach(card => {
-    const show = card.innerText.toLowerCase().includes(query) ||
-                 (card.dataset.search || "").includes(query);
-    card.style.display = show ? "" : "none";
-    if (show) visible++;
-  });
+  const total = entries.reduce((sum, [id,qty]) => {
+    const p = products.find(item => item.id === Number(id));
+    return sum + p.price * qty;
+  }, 0);
+  const shipping = total > 0 && total < 50 ? 2.99 : 0;
 
-  document.getElementById("empty").style.display = visible ? "none" : "block";
+  alert(
+    "🎉 ¡Pedido de simulación completado!\\n\\n" +
+    "Número de pedido ficticio: DS-DEMO-" + Math.floor(10000 + Math.random()*90000) +
+    "\\nTotal de ejemplo: " + money(total + shipping) +
+    "\\n\\nNo se ha realizado ningún pago ni se enviará ningún producto. ¡Gracias por probar DaniShop!"
+  );
+
+  cart = {};
+  renderCart();
+}
+
+document.getElementById("searchForm").addEventListener("submit", event => {
+  event.preventDefault();
+  searchTerm = document.getElementById("searchInput").value.trim().toLowerCase();
+  activeCategory = "Todos";
+  renderProducts();
+  document.getElementById("productsSection").scrollIntoView({behavior:"smooth"});
 });
 
-renderShop();
+document.getElementById("searchInput").addEventListener("input", event => {
+  searchTerm = event.target.value.trim().toLowerCase();
+  activeCategory = "Todos";
+  renderProducts();
+});
+
+document.querySelectorAll("nav a[data-category]").forEach(link => {
+  link.addEventListener("click", () => filterCategory(link.dataset.category));
+});
+
+document.getElementById("year").textContent = new Date().getFullYear();
+renderProducts();
 renderCart();
 </script>
 
 </body>
 </html>
 ```
-
