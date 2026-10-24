@@ -1,680 +1,315 @@
 
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DaniShop | Ofertas para todos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DaniShop | Tu tienda online</title>
 <style>
-:root {
-  --orange: #ff6a00;
-  --orange2: #ff8a00;
-  --dark: #202124;
-  --muted: #707782;
-  --bg: #f5f6f8;
-  --white: #fff;
-  --green: #159447;
-}
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  color: var(--dark);
-  background: var(--bg);
-}
-button, input { font: inherit; }
-button { cursor: pointer; }
-.topbar {
-  padding: 9px 5%;
-  background: #202124;
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  font-size: 13px;
-}
-header {
-  background: white;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  box-shadow: 0 2px 8px #0000000c;
-}
-.head {
-  max-width: 1400px;
-  margin: auto;
-  padding: 17px 4%;
-  display: flex;
-  align-items: center;
-  gap: 22px;
-}
-.logo {
-  color: var(--orange);
-  font-weight: 900;
-  font-size: 29px;
-  letter-spacing: -1px;
-  white-space: nowrap;
-}
-.logo span { color: #252525; }
-.search {
-  flex: 1;
-  display: flex;
-  border: 2px solid #e2e4e8;
-  border-radius: 30px;
-  overflow: hidden;
-  background: white;
-}
-.search input {
-  border: none;
-  outline: none;
-  padding: 13px 18px;
-  width: 100%;
-  min-width: 0;
-}
-.search button {
-  border: none;
-  color: white;
-  background: var(--orange);
-  padding: 0 22px;
-}
-.head-action {
-  border: none;
-  background: transparent;
-  font-weight: bold;
-  white-space: nowrap;
-}
-nav {
-  display: flex;
-  gap: 25px;
-  padding: 0 4% 13px;
-  max-width: 1400px;
-  margin: auto;
-  overflow-x: auto;
-}
-nav a {
-  text-decoration: none;
-  color: #333;
-  font-size: 14px;
-  white-space: nowrap;
-}
-nav a:hover { color: var(--orange); }
-main {
-  max-width: 1400px;
-  margin: auto;
-  padding: 18px 3%;
-}
-.hero {
-  background: linear-gradient(115deg, #ff6100, #ff9b00);
-  border-radius: 15px;
-  color: white;
-  padding: 42px 5%;
-  min-height: 235px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  overflow: hidden;
-}
-.hero h1 {
-  font-size: clamp(30px, 4vw, 52px);
-  margin: 0 0 12px;
-  line-height: 1.05;
-}
-.hero p { font-size: 18px; margin: 0 0 20px; }
-.hero button {
-  background: white;
-  color: var(--orange);
-  border: none;
-  border-radius: 25px;
-  padding: 12px 24px;
-  font-weight: bold;
-}
-.hero-art {
-  font-size: clamp(65px, 11vw, 125px);
-  text-align: center;
-  min-width: 25%;
-}
-.notice {
-  background: #fff3e8;
-  border: 1px solid #ffd8bb;
-  padding: 12px 16px;
-  margin: 16px 0;
-  border-radius: 9px;
-  font-size: 13px;
-  color: #8b4200;
-}
-.categories {
-  display: grid;
-  grid-template-columns: repeat(8, minmax(75px, 1fr));
-  gap: 12px;
-  margin: 25px 0 30px;
-}
-.category {
-  border: 1px solid #eee;
-  background: white;
-  border-radius: 12px;
-  padding: 14px 6px;
-  text-align: center;
-  transition: .2s;
-}
-.category:hover {
-  border-color: var(--orange);
-  transform: translateY(-2px);
-}
-.category div { font-size: 30px; margin-bottom: 8px; }
-.category span { font-size: 12px; }
-.section-title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  margin: 27px 0 16px;
-}
-.section-title h2 { margin: 0; font-size: 24px; }
-.section-title span { color: var(--orange); font-size: 13px; }
-.layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 290px;
-  align-items: start;
-  gap: 22px;
-}
-.products {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px;
-}
-.card {
-  background: white;
-  border: 1px solid #e9eaed;
-  border-radius: 11px;
-  padding: 10px;
-  min-width: 0;
-  transition: box-shadow .2s, transform .2s;
-}
-.card:hover {
-  box-shadow: 0 5px 20px #00000012;
-  transform: translateY(-2px);
-}
-.product-image {
-  height: 155px;
-  border-radius: 8px;
-  background: #f1f2f4;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 65px;
-  overflow: hidden;
-}
-.product-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.badge {
-  display: inline-block;
-  background: var(--orange);
-  color: white;
-  font-size: 11px;
-  font-weight: bold;
-  padding: 5px 7px;
-  border-radius: 5px;
-  margin: 10px 0 6px;
-}
-.card h3 {
-  font-size: 14px;
-  line-height: 1.4;
-  min-height: 39px;
-  margin: 3px 0;
-}
-.rating { color: #ff9a00; font-size: 13px; }
-.rating small { color: #7b818b; }
-.price-row { margin: 9px 0 4px; }
-.price {
-  color: #ef4c13;
-  font-weight: 800;
-  font-size: 20px;
-}
-.old-price {
-  color: #858585;
-  font-size: 12px;
-  text-decoration: line-through;
-  margin-left: 5px;
-}
-.shipping { font-size: 11px; color: #7b818b; margin: 7px 0; }
-.add-btn {
-  width: 100%;
-  border: none;
-  border-radius: 22px;
-  background: linear-gradient(90deg, #ff6a00, #ff8500);
-  color: white;
-  font-weight: bold;
-  padding: 10px 5px;
-  margin-top: 5px;
-  font-size: 12px;
-}
-.add-btn:hover { filter: brightness(.95); }
-.cart {
-  background: white;
-  border: 1px solid #e2e4e8;
-  border-radius: 12px;
-  padding: 17px;
-  position: sticky;
-  top: 145px;
-}
-.cart h2 { font-size: 20px; margin: 0 0 14px; }
-.cart-empty { color: var(--muted); font-size: 14px; padding: 20px 0; }
-.cart-item {
-  display: grid;
-  grid-template-columns: 52px minmax(0,1fr);
-  gap: 10px;
-  padding: 12px 0;
-  border-bottom: 1px solid #eee;
-}
-.cart-thumb {
-  width: 52px;
-  height: 52px;
-  background: #f1f2f4;
-  border-radius: 7px;
-  display: grid;
-  place-items: center;
-  font-size: 27px;
-}
-.cart-name { font-size: 12px; line-height: 1.35; }
-.cart-price { font-weight: bold; font-size: 13px; margin-top: 5px; }
-.quantity {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  margin-top: 7px;
-}
-.quantity button {
-  border: 1px solid #ddd;
-  border-radius: 50%;
-  background: white;
-  width: 25px;
-  height: 25px;
-}
-.remove {
-  float: right;
-  border: none;
-  background: none;
-  color: #888;
-}
-.summary { margin-top: 17px; font-size: 13px; }
-.summary div {
-  display: flex;
-  justify-content: space-between;
-  margin: 10px 0;
-}
-.summary .total {
-  font-size: 18px;
-  font-weight: bold;
-  border-top: 1px solid #eee;
-  padding-top: 13px;
-}
-.checkout {
-  width: 100%;
-  border: none;
-  border-radius: 7px;
-  padding: 13px 8px;
-  background: var(--orange);
-  color: white;
-  font-weight: bold;
-  margin-top: 10px;
-}
-.checkout:disabled { background: #bbb; cursor: not-allowed; }
-.demo-note {
-  background: #eef6ff;
-  color: #20538a;
-  border-radius: 8px;
-  padding: 12px;
-  font-size: 12px;
-  line-height: 1.5;
-  margin-top: 13px;
-}
-.benefits {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  background: white;
-  border-radius: 12px;
-  margin: 30px 0;
-  padding: 22px;
-  gap: 15px;
-}
-.benefit { display: flex; align-items: center; gap: 12px; }
-.benefit-icon { font-size: 28px; }
-.benefit strong { display: block; font-size: 13px; }
-.benefit small { color: var(--muted); font-size: 11px; }
-footer {
-  background: #202124;
-  color: white;
-  padding: 30px 5%;
-}
-.footer-inner {
-  max-width: 1300px;
-  margin: auto;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-footer p { color: #c4c4c4; font-size: 13px; line-height: 1.6; }
-footer a { color: white; text-decoration: none; margin-right: 12px; font-size: 13px; }
-footer a:hover { color: #ff9a00; }
-.no-results {
-  grid-column: 1/-1;
-  background: white;
-  padding: 35px;
-  text-align: center;
-  border-radius: 10px;
-}
-@media (max-width: 1050px) {
-  .layout { grid-template-columns: 1fr; }
-  .cart { position: static; }
-  .products { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .categories { grid-template-columns: repeat(4, 1fr); }
-}
-@media (max-width: 650px) {
-  .topbar { justify-content: center; font-size: 11px; }
-  .topbar span:nth-child(2) { display: none; }
-  .head { flex-wrap: wrap; gap: 12px; padding: 13px 4%; }
-  .logo { font-size: 25px; }
-  .search { order: 3; flex-basis: 100%; }
-  .head-action { margin-left: auto; font-size: 12px; }
-  nav { gap: 18px; }
-  main { padding: 12px 3%; }
-  .hero { min-height: 200px; padding: 25px 6%; }
-  .hero p { font-size: 14px; }
-  .hero-art { font-size: 55px; min-width: auto; }
-  .categories { grid-template-columns: repeat(4, 1fr); gap: 7px; }
-  .category { padding: 10px 3px; }
-  .category div { font-size: 25px; }
-  .category span { font-size: 10px; }
-  .products { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
-  .product-image { height: 125px; font-size: 50px; }
-  .card { padding: 7px; }
-  .card h3 { font-size: 12px; }
-  .price { font-size: 17px; }
-  .old-price { font-size: 10px; }
-  .section-title h2 { font-size: 20px; }
-  .benefits { grid-template-columns: 1fr; padding: 17px; }
-}
+:root{--orange:#ff6900;--dark:#17212d;--bg:#f5f7fa;--line:#e1e6ed}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:#17212d}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.top{background:var(--dark);color:white;padding:10px 4%;display:flex;justify-content:space-between;gap:12px;font-size:12px}
+header{background:white;position:sticky;top:0;z-index:5;box-shadow:0 2px 7px #00000010}
+.head{max-width:1500px;margin:auto;padding:15px 3%;display:flex;align-items:center;gap:20px}
+.logo{font-size:29px;font-weight:900;color:var(--orange);white-space:nowrap}
+.logo span{color:var(--dark)}
+.search{display:flex;flex:1;min-width:100px;border:1px solid #ccd3dd;border-radius:25px;overflow:hidden}
+.search input{width:100%;min-width:0;border:0;padding:13px 17px;outline:none}
+.search button,.primary{background:var(--orange);color:white;border:0;padding:12px 20px;font-weight:bold}
+.action{border:0;background:white;font-weight:bold;white-space:nowrap}
+nav{display:flex;gap:23px;overflow-x:auto;padding:12px 4%;border-top:1px solid #eee}
+nav a{color:#263242;text-decoration:none;white-space:nowrap;font-size:13px}
+nav a:hover{color:var(--orange)}
+main{max-width:1500px;margin:auto;padding:17px 3%}
+.hero{min-height:230px;background:linear-gradient(110deg,#17212d 0%,#273545 28%,#ff7900 29%,#ff9b00 100%);border-radius:13px;color:white;display:flex;align-items:center;justify-content:space-between;padding:28px 4%;gap:15px;overflow:hidden}
+.hero h1{font-size:clamp(30px,4vw,53px);margin:0 0 12px}
+.hero p{font-size:17px}
+.hero .primary{background:white;color:var(--orange);border-radius:25px}
+.hero-art{font-size:clamp(50px,8vw,100px);white-space:nowrap}
+.notice{background:#fff3e8;color:#854000;border:1px solid #ffd9b9;border-radius:8px;padding:12px;margin:13px 0;font-size:13px}
+.cats{display:grid;grid-template-columns:repeat(8,1fr);gap:10px;margin:20px 0}
+.cat{background:white;border:1px solid var(--line);border-radius:10px;padding:13px 5px;text-align:center}
+.cat b{display:block;font-size:27px;margin-bottom:7px}
+.cat span{font-size:12px}
+.cat:hover{border-color:var(--orange)}
+.layout{display:grid;grid-template-columns:205px minmax(0,1fr) 260px;gap:15px;align-items:start}
+.filters,.cart{background:white;border:1px solid var(--line);border-radius:10px;padding:15px}
+.filters h3,.cart h3{margin:0 0 15px}
+.filters h4{margin:19px 0 9px;font-size:13px}
+.filters label{display:block;font-size:12px;margin:11px 0;cursor:pointer}
+.filters input{accent-color:var(--orange)}
+.range{width:100%;accent-color:var(--orange)}
+.products-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:13px}
+.products-head h2{font-size:21px;margin:0}
+.products-head select{padding:9px;border:1px solid var(--line);border-radius:7px;background:white;max-width:150px}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.card{background:white;border:1px solid var(--line);border-radius:10px;padding:9px;min-width:0;transition:.2s}
+.card:hover{box-shadow:0 4px 17px #00000012;transform:translateY(-2px)}
+.photo{height:145px;background:#f0f2f5;border-radius:7px;position:relative;overflow:hidden;display:grid;place-items:center}
+.photo img{width:100%;height:100%;object-fit:cover}
+.discount{position:absolute;top:7px;left:7px;background:var(--orange);color:white;border-radius:15px;padding:5px 7px;font-size:11px;font-weight:bold}
+.card h3{font-size:13px;line-height:1.4;height:36px;overflow:hidden;margin:10px 0 5px}
+.rating{color:#ff9900;font-size:13px}
+.rating small{color:#7b8490}
+.price{color:#ee4d16;font-size:19px;font-weight:800;margin:7px 0}
+.old{font-size:11px;color:#87909c;text-decoration:line-through;margin-left:4px}
+.shipping{font-size:11px;color:#16854a;margin:7px 0}
+.add{background:var(--orange);color:white;border:0;border-radius:20px;width:100%;padding:10px 4px;font-size:12px;font-weight:bold}
+.add:hover,.primary:hover{filter:brightness(.94)}
+.cart{position:sticky;top:150px}
+.cart-line{display:grid;grid-template-columns:48px minmax(0,1fr);gap:9px;padding:12px 0;border-bottom:1px solid #eee}
+.cart-img{width:48px;height:48px;object-fit:cover;border-radius:6px;background:#eee}
+.cart-name{font-size:12px;line-height:1.4}
+.cart-price{font-size:13px;font-weight:bold;margin-top:5px}
+.qty{display:flex;align-items:center;gap:9px;margin-top:7px}
+.qty button{width:24px;height:24px;border:1px solid #ddd;border-radius:50%;background:white}
+.remove{float:right;border:0;background:white;color:#999}
+.summary{font-size:13px;margin-top:15px}
+.summary div{display:flex;justify-content:space-between;margin:11px 0}
+.total{border-top:1px solid #eee;padding-top:12px;font-size:18px;font-weight:bold}
+.checkout{width:100%;padding:13px 5px;border:0;border-radius:7px;background:var(--orange);color:white;font-weight:bold}
+.checkout:disabled{background:#aaa;cursor:not-allowed}
+.demo{font-size:11px;line-height:1.5;color:#245b91;background:#edf6ff;padding:11px;border-radius:8px;margin-top:12px}
+.empty{padding:25px 10px;text-align:center;color:#78818c;font-size:13px;background:white;border-radius:9px}
+.benefits{display:flex;justify-content:space-around;gap:15px;background:white;padding:22px;border-radius:10px;margin:25px 0}
+.benefits div{font-size:13px}
+footer{background:var(--dark);color:white;padding:25px 4%;display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px}
+footer p{font-size:12px;color:#cbd1d9}
+@media(max-width:1200px){.layout{grid-template-columns:180px minmax(0,1fr)}.cart{grid-column:1/-1;position:static}.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:750px){.top span:nth-child(2){display:none}.head{flex-wrap:wrap;gap:12px}.logo{font-size:25px}.search{order:3;flex-basis:100%}.action{margin-left:auto;font-size:12px}nav{gap:17px}.hero{padding:24px 5%;min-height:180px}.hero-art{font-size:48px}.hero p{font-size:13px}.cats{grid-template-columns:repeat(4,1fr);gap:6px}.cat{padding:10px 2px}.cat span{font-size:10px}.layout{grid-template-columns:1fr}.filters{order:2}.cart{grid-column:auto;order:3}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.photo{height:125px}.benefits{flex-direction:column}.products-head h2{font-size:18px}}
 </style>
 </head>
 <body>
-
-<div class="topbar">
-  <span>🚚 Envío gratis en pedidos de demostración</span>
-  <span>↩️ Devoluciones simuladas</span>
-  <span>🔒 Sin pagos reales</span>
+<div class="top">
+<span>🚚 Envío gratuito de demostración</span>
+<span>↩️ Devoluciones simuladas</span>
+<span>🔒 Compras 100 % ficticias</span>
 </div>
 
 <header>
-  <div class="head">
-    <div class="logo">Dani<span>Shop</span> 🛍️</div>
-    <form class="search" id="searchForm">
-      <input id="searchInput" type="search" placeholder="Buscar productos..." aria-label="Buscar productos">
-      <button type="submit" aria-label="Buscar">🔍</button>
-    </form>
-    <button class="head-action" onclick="document.getElementById('productsSection').scrollIntoView({behavior:'smooth'})">📦 Productos</button>
-    <button class="head-action" onclick="document.getElementById('cart').scrollIntoView({behavior:'smooth'})">🛒 Carrito <span id="cartCount">0</span></button>
-  </div>
-  <nav>
-    <a href="#inicio">Inicio</a>
-    <a href="#ofertas">Ofertas</a>
-    <a href="#productsSection">Más vendidos</a>
-    <a href="#productsSection" data-category="Tecnología">Tecnología</a>
-    <a href="#productsSection" data-category="Hogar">Hogar y cocina</a>
-    <a href="#productsSection" data-category="Moda">Moda</a>
-    <a href="#productsSection" data-category="Deportes">Deportes</a>
-    <a href="#productsSection" data-category="Accesorios">Accesorios</a>
-  </nav>
+<div class="head">
+<div class="logo">Dani<span>Shop</span> 🛍️</div>
+<form class="search" id="searchForm">
+<input id="search" placeholder="Buscar productos, categorías..." aria-label="Buscar productos">
+<button>🔍</button>
+</form>
+<button class="action" onclick="document.querySelector('#catalog').scrollIntoView({behavior:'smooth'})">📦 Productos</button>
+<button class="action" onclick="document.querySelector('#cart').scrollIntoView({behavior:'smooth'})">🛒 Carrito <span id="count">0</span></button>
+</div>
+<nav>
+<a href="#home">Inicio</a>
+<a href="#catalog" onclick="offersOnly=true;render()">🔥 Ofertas</a>
+<a href="#catalog">Más vendidos</a>
+<a href="#catalog" onclick="choose('Tecnología')">Tecnología</a>
+<a href="#catalog" onclick="choose('Hogar')">Hogar</a>
+<a href="#catalog" onclick="choose('Moda')">Moda</a>
+<a href="#catalog" onclick="choose('Deportes')">Deportes</a>
+<a href="#catalog" onclick="choose('Juguetes')">Juguetes</a>
+<a href="#catalog" onclick="choose('Accesorios')">Accesorios</a>
+</nav>
 </header>
 
-<main id="inicio">
-  <section class="hero" id="ofertas">
-    <div>
-      <h1>¡Ofertas increíbles<br>todos los días!</h1>
-      <p>Descubre productos geniales a precios de demostración.</p>
-      <button onclick="document.getElementById('productsSection').scrollIntoView({behavior:'smooth'})">Explorar productos →</button>
-    </div>
-    <div class="hero-art">🎧 ⌚ 🎁</div>
-  </section>
+<main id="home">
+<section class="hero">
+<div>
+<h1>Ofertas increíbles<br>todos los días</h1>
+<p>Encuentra tus productos favoritos en DaniShop.</p>
+<button class="primary" onclick="document.querySelector('#catalog').scrollIntoView({behavior:'smooth'})">Explorar ofertas →</button>
+</div>
+<div class="hero-art">🎧 ⌚ 📱 👟</div>
+</section>
+<div class="notice">ℹ️ <b>DaniShop es una tienda de simulación.</b> Los productos, precios, valoraciones y descuentos son demostrativos. No se realizan pagos ni envíos reales.</div>
 
-  <div class="notice">
-    ℹ️ <strong>DaniShop es una tienda de simulación.</strong>
-    Los precios son ejemplos. No se realizan compras reales, cobros ni envíos.
-  </div>
+<div class="cats">
+<button class="cat" onclick="choose('Tecnología')"><b>📱</b><span>Tecnología</span></button>
+<button class="cat" onclick="choose('Hogar')"><b>🏠</b><span>Hogar</span></button>
+<button class="cat" onclick="choose('Moda')"><b>👕</b><span>Moda</span></button>
+<button class="cat" onclick="choose('Belleza')"><b>🧴</b><span>Belleza</span></button>
+<button class="cat" onclick="choose('Deportes')"><b>⚽</b><span>Deportes</span></button>
+<button class="cat" onclick="choose('Juguetes')"><b>🧸</b><span>Juguetes</span></button>
+<button class="cat" onclick="choose('Accesorios')"><b>💍</b><span>Accesorios</span></button>
+<button class="cat" onclick="choose('Todos')"><b>☷</b><span>Ver todo</span></button>
+</div>
 
-  <section class="categories" aria-label="Categorías">
-    <button class="category" onclick="filterCategory('Tecnología')"><div>📱</div><span>Tecnología</span></button>
-    <button class="category" onclick="filterCategory('Hogar')"><div>🏠</div><span>Hogar</span></button>
-    <button class="category" onclick="filterCategory('Moda')"><div>👕</div><span>Moda</span></button>
-    <button class="category" onclick="filterCategory('Accesorios')"><div>💍</div><span>Accesorios</span></button>
-    <button class="category" onclick="filterCategory('Deportes')"><div>⚽</div><span>Deportes</span></button>
-    <button class="category" onclick="filterCategory('Juguetes')"><div>🧸</div><span>Juguetes</span></button>
-    <button class="category" onclick="filterCategory('Belleza')"><div>🧴</div><span>Belleza</span></button>
-    <button class="category" onclick="filterCategory('Todos')"><div>☷</div><span>Ver todo</span></button>
-  </section>
+<div class="layout" id="catalog">
+<aside class="filters">
+<h3>Filtros</h3>
+<h4>Categoría</h4>
+<div id="categoryFilters"></div>
+<h4>Precio máximo</h4>
+<input class="range" id="maxPrice" type="range" min="5" max="600" value="600">
+<div style="font-size:12px" id="priceLabel">Hasta 600 €</div>
+<h4>Ordenar por</h4>
+<select id="sort" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:6px">
+<option value="popular">Más populares</option>
+<option value="low">Precio: menor a mayor</option>
+<option value="high">Precio: mayor a menor</option>
+<option value="discount">Mayor descuento</option>
+</select>
+<button class="primary" style="width:100%;margin-top:14px;border-radius:6px" onclick="choose('Todos')">Limpiar filtros</button>
+</aside>
 
-  <section id="productsSection">
-    <div class="section-title">
-      <h2 id="productHeading">Productos destacados</h2>
-      <span>✨ Ofertas de demostración</span>
-    </div>
+<section>
+<div class="products-head">
+<h2 id="heading">Productos destacados</h2>
+<span id="resultCount" style="font-size:12px;color:#697484"></span>
+</div>
+<div class="grid" id="products"></div>
+</section>
 
-    <div class="layout">
-      <div class="products" id="productGrid"></div>
+<aside class="cart" id="cart">
+<h3>🛒 Tu carrito (<span id="cartCount">0</span>)</h3>
+<div id="cartItems"><div class="empty">Tu carrito está vacío.<br>¡Añade algún producto!</div></div>
+<div class="summary">
+<div><span>Subtotal</span><b id="subtotal">0,00 €</b></div>
+<div><span>Envío de prueba</span><b id="shipping">0,00 €</b></div>
+<div class="total"><span>Total</span><span id="total">0,00 €</span></div>
+</div>
+<button class="checkout" id="checkout" onclick="finish()" disabled>Finalizar compra (simulación)</button>
+<div class="demo">🔐 <b>Compra ficticia.</b><br>No introduzcas datos personales ni bancarios. No se realiza ningún cobro.</div>
+</aside>
+</div>
 
-      <aside class="cart" id="cart">
-        <h2>🛒 Tu carrito (<span id="cartTitleCount">0</span>)</h2>
-        <div id="cartItems"><div class="cart-empty">Tu carrito está vacío. ¡Añade algún producto!</div></div>
-        <div class="summary">
-          <div><span>Subtotal</span><strong id="subtotal">0,00 €</strong></div>
-          <div><span>Envío simulado</span><strong id="shipping">0,00 €</strong></div>
-          <div class="total"><span>Total</span><span id="total">0,00 €</span></div>
-        </div>
-        <button class="checkout" id="checkoutButton" onclick="checkout()" disabled>Finalizar compra (simulación)</button>
-        <div class="demo-note">
-          🛡️ <strong>Compra 100 % ficticia.</strong><br>
-          No se te cobrará nada. No introduzcas datos bancarios ni personales.
-        </div>
-      </aside>
-    </div>
-  </section>
-
-  <section class="benefits">
-    <div class="benefit"><span class="benefit-icon">🚚</span><div><strong>Envío de demostración</strong><small>Sin envíos reales</small></div></div>
-    <div class="benefit"><span class="benefit-icon">🔐</span><div><strong>Compra segura para practicar</strong><small>Sin pagos ni datos bancarios</small></div></div>
-    <div class="benefit"><span class="benefit-icon">💬</span><div><strong>Atención de prueba</strong><small>Una tienda para experimentar</small></div></div>
-  </section>
+<section class="benefits">
+<div>🚚 <b>Envíos simulados</b><br><small>Sin entregas reales</small></div>
+<div>🔒 <b>Sin pagos reales</b><br><small>No pedimos datos bancarios</small></div>
+<div>💬 <b>DaniShop</b><br><small>Tu tienda de demostración</small></div>
+</section>
 </main>
 
 <footer>
-  <div class="footer-inner">
-    <div>
-      <div class="logo" style="color:#ff8a00">DaniShop 🛍️</div>
-      <p>Grandes ideas, pequeños precios.<br>Esta web es una simulación educativa.</p>
-    </div>
-    <div>
-      <strong>Información</strong>
-      <p><a href="#inicio">Inicio</a><a href="#productsSection">Productos</a><a href="#ofertas">Ofertas</a></p>
-      <p>© <span id="year"></span> DaniShop · Proyecto de demostración</p>
-    </div>
-  </div>
+<div><div class="logo">DaniShop 🛍️</div><p>Todo lo que necesitas, en un solo lugar.</p></div>
+<div><b>Información</b><p>Sobre nosotros · Condiciones · Contacto</p><p>© <span id="year"></span> DaniShop · Simulación</p></div>
 </footer>
 
 <script>
-const products = [
-  {id:1, name:"Auriculares inalámbricos", category:"Tecnología", emoji:"🎧", price:14.99, old:29.99, rating:"4.8", reviews:"1.243", discount:50},
-  {id:2, name:"Reloj inteligente deportivo", category:"Tecnología", emoji:"⌚", price:19.99, old:39.99, rating:"4.7", reviews:"986", discount:50},
-  {id:3, name:"Lámpara LED para escritorio", category:"Hogar", emoji:"💡", price:12.49, old:24.99, rating:"4.6", reviews:"532", discount:50},
-  {id:4, name:"Mochila para uso diario", category:"Moda", emoji:"🎒", price:22.99, old:39.99, rating:"4.8", reviews:"784", discount:43},
-  {id:5, name:"Zapatillas deportivas", category:"Moda", emoji:"👟", price:29.99, old:49.99, rating:"4.5", reviews:"1.568", discount:40},
-  {id:6, name:"Botella térmica reutilizable", category:"Accesorios", emoji:"🧴", price:9.99, old:19.99, rating:"4.7", reviews:"623", discount:50},
-  {id:7, name:"Balón de fútbol", category:"Deportes", emoji:"⚽", price:16.99, old:26.99, rating:"4.6", reviews:"412", discount:37},
-  {id:8, name:"Teclado gaming RGB", category:"Tecnología", emoji:"⌨️", price:27.99, old:44.99, rating:"4.8", reviews:"1.017", discount:38},
-  {id:9, name:"Gafas de sol", category:"Accesorios", emoji:"🕶️", price:8.99, old:17.99, rating:"4.4", reviews:"356", discount:50},
-  {id:10, name:"Cojín decorativo", category:"Hogar", emoji:"🛋️", price:11.99, old:21.99, rating:"4.5", reviews:"289", discount:45},
-  {id:11, name:"Set de figuras de juguete", category:"Juguetes", emoji:"🧸", price:13.99, old:23.99, rating:"4.7", reviews:"643", discount:42},
-  {id:12, name:"Organizador de maquillaje", category:"Belleza", emoji:"🪞", price:10.99, old:18.99, rating:"4.6", reviews:"308", discount:42}
+const base=[
+["Auriculares inalámbricos","Tecnología",14.99,29.99,"photo-1505740420928-5e560c06d30e"],
+["Reloj inteligente","Tecnología",19.99,39.99,"photo-1523275335684-37898b6baf30"],
+["Ordenador portátil","Tecnología",399.99,599.99,"photo-1496181133206-80ce9b88a853"],
+["Teclado gaming RGB","Tecnología",27.99,44.99,"photo-1587829741301-dc798b83add3"],
+["Ratón inalámbrico","Tecnología",12.99,24.99,"photo-1527814050087-3793815479db"],
+["Cámara digital","Tecnología",89.99,129.99,"photo-1516035069371-29a1b244cc32"],
+["Altavoz portátil","Tecnología",22.99,39.99,"photo-1608043152269-423dbba4e7e1"],
+["Monitor de ordenador","Tecnología",119.99,179.99,"photo-1527443224154-c4a3942d3acf"],
+["Teléfono móvil","Tecnología",149.99,219.99,"photo-1511707171634-5f897ff02aa9"],
+["Tableta digital","Tecnología",129.99,199.99,"photo-1544244015-0df4b3ffc6b0"],
+["Zapatillas deportivas","Moda",29.99,49.99,"photo-1542291026-7eec264c27ff"],
+["Camiseta casual","Moda",12.99,22.99,"photo-1521572163474-6864f9cf17ab"],
+["Sudadera moderna","Moda",24.99,39.99,"photo-1556821840-3a63f95609a7"],
+["Mochila urbana","Moda",22.99,39.99,"photo-1553062407-98eeb64c6a62"],
+["Bolso de moda","Moda",24.99,44.99,"photo-1548036328-c9fa89d128fa"],
+["Chaqueta casual","Moda",39.99,69.99,"photo-1551028719-00167b16eac5"],
+["Gorra deportiva","Moda",9.99,17.99,"photo-1588850561407-ed78c282e89b"],
+["Gafas de sol","Moda",8.99,19.99,"photo-1511499767150-a48a237f0083"],
+["Lámpara de escritorio","Hogar",12.49,24.99,"photo-1507473885765-e6ed057f782c"],
+["Cojín decorativo","Hogar",9.99,18.99,"photo-1584100936595-c0654b55a2e2"],
+["Taza de cerámica","Hogar",5.99,11.99,"photo-1514228742587-6b1558fcca3d"],
+["Silla moderna","Hogar",49.99,79.99,"photo-1503602642458-232111445657"],
+["Mesa auxiliar","Hogar",39.99,69.99,"photo-1499933374294-4584851497cc"],
+["Botella reutilizable","Hogar",9.99,19.99,"photo-1602143407151-7111542de6e8"],
+["Perfume","Belleza",14.99,29.99,"photo-1541643600914-78b084683601"],
+["Crema cosmética","Belleza",8.99,17.99,"photo-1608248543803-ba4f8c70ae0b"],
+["Organizador de maquillaje","Belleza",10.99,19.99,"photo-1522335789203-aabd1fc54bc9"],
+["Collar elegante","Accesorios",9.99,21.99,"photo-1611652022419-a9419f74343d"],
+["Cartera compacta","Accesorios",12.99,24.99,"photo-1627123424574-724758594e93"],
+["Maleta de viaje","Accesorios",44.99,79.99,"photo-1565026057447-bc90a3dceb87"],
+["Balón de fútbol","Deportes",16.99,26.99,"photo-1614632537190-23e4146777db"],
+["Mancuernas deportivas","Deportes",19.99,34.99,"photo-1583454110551-21f2fa2afe61"],
+["Esterilla deportiva","Deportes",14.99,24.99,"photo-1592432678016-e910b452f9a2"],
+["Oso de peluche","Juguetes",12.99,22.99,"photo-1559454403-b8fb88521f11"],
+["Juego de construcción","Juguetes",19.99,34.99,"photo-1587654780291-39c9404d746b"],
+["Rompecabezas","Juguetes",9.99,17.99,"photo-1606503153255-59d8b8b82148"],
+["Teclado de piano","Tecnología",79.99,119.99,"photo-1520523839897-bd0b52f945a0"],
+["Silla de oficina","Hogar",69.99,109.99,"photo-1580480055273-228ff5388ef8"],
+["Zapatos casuales","Moda",34.99,59.99,"photo-1549298916-b41d501d3772"],
+["Auriculares de diadema","Tecnología",24.99,47.99,"photo-1546435770-a3e426bf472b"]
 ];
 
-let cart = {};
-let activeCategory = "Todos";
-let searchTerm = "";
-
-const money = n => n.toLocaleString("es-ES", {
-  style:"currency", currency:"EUR"
+const products=Array.from({length:300},(_,i)=>{
+ const b=base[i%base.length],v=Math.floor(i/base.length);
+ const price=+(b[2]*(1+v*.035)).toFixed(2);
+ return {id:i+1,name:v?`${b[0]} — Modelo ${v+1}`:b[0],category:b[1],price,old:+(price*b[3]/b[2]).toFixed(2),photo:`https://images.unsplash.com/${b[4]}?auto=format&fit=crop&w=500&q=75`,rating:(4.2+(i*7%8)/10).toFixed(1),reviews:125+(i*137%8500)};
 });
 
-function renderProducts() {
-  const grid = document.getElementById("productGrid");
-  const filtered = products.filter(p => {
-    const matchesCategory = activeCategory === "Todos" || p.category === activeCategory;
-    const matchesSearch = p.name.toLowerCase().includes(searchTerm) ||
-      p.category.toLowerCase().includes(searchTerm);
-    return matchesCategory && matchesSearch;
-  });
+let cart={},category="Todos",query="",offersOnly=false;
+const money=n=>n.toLocaleString("es-ES",{style:"currency",currency:"EUR"});
+const categories=["Tecnología","Hogar","Moda","Belleza","Deportes","Juguetes","Accesorios"];
 
-  document.getElementById("productHeading").textContent =
-    activeCategory === "Todos" ? "Productos destacados" : activeCategory;
+document.getElementById("categoryFilters").innerHTML=categories.map(c=>
+ `<label><input type="checkbox" value="${c}" onchange="categoryChange(this)"> ${c} <span style="color:#8892a0">(${products.filter(p=>p.category===c).length})</span></label>`
+).join("");
 
-  if (!filtered.length) {
-    grid.innerHTML = '<div class="no-results">😕 No encontramos productos. Prueba con otra búsqueda.</div>';
-    return;
-  }
-
-  grid.innerHTML = filtered.map(p => `
-    <article class="card">
-      <div class="product-image" aria-label="${p.name}">${p.emoji}</div>
-      <span class="badge">-${p.discount}%</span>
-      <h3>${p.name}</h3>
-      <div class="rating">★★★★★ <small>(${p.reviews})</small></div>
-      <div class="price-row">
-        <span class="price">${money(p.price)}</span>
-        <span class="old-price">${money(p.old)}</span>
-      </div>
-      <div class="shipping">Precio de ejemplo · Sin envío real</div>
-      <button class="add-btn" onclick="addToCart(${p.id})">Añadir al carrito</button>
-    </article>
-  `).join("");
+function choose(c){
+ category=c;offersOnly=false;
+ document.querySelectorAll("#categoryFilters input").forEach(x=>x.checked=c==="Todos"?false:x.value===c);
+ render();
 }
-
-function filterCategory(category) {
-  activeCategory = category;
-  searchTerm = "";
-  document.getElementById("searchInput").value = "";
-  renderProducts();
-  document.getElementById("productsSection").scrollIntoView({behavior:"smooth"});
+function categoryChange(el){
+ const checked=[...document.querySelectorAll("#categoryFilters input:checked")].map(x=>x.value);
+ category=checked.length===1?checked[0]:"Todos";
+ render();
 }
-
-function addToCart(id) {
-  cart[id] = (cart[id] || 0) + 1;
-  renderCart();
+function render(){
+ const max=+document.getElementById("maxPrice").value;
+ document.getElementById("priceLabel").textContent=`Hasta ${money(max)}`;
+ let list=products.filter(p=>(category==="Todos"||p.category===category)&&p.price<=max&&(p.name.toLowerCase().includes(query)||p.category.toLowerCase().includes(query))&&(!offersOnly||((p.old-p.price)/p.old>.3)));
+ const sort=document.getElementById("sort").value;
+ if(sort==="low")list.sort((a,b)=>a.price-b.price);
+ if(sort==="high")list.sort((a,b)=>b.price-a.price);
+ if(sort==="discount")list.sort((a,b)=>(b.old-b.price)/b.old-(a.old-a.price)/a.old);
+ document.getElementById("resultCount").textContent=`${list.length} productos`;
+ document.getElementById("heading").textContent=offersOnly?"Ofertas destacadas":category==="Todos"?"Productos destacados":category;
+ const grid=document.getElementById("products");
+ if(!list.length){grid.innerHTML='<div class="empty">No se encontraron productos. Cambia los filtros o la búsqueda.</div>';return}
+ grid.innerHTML=list.map(p=>`<article class="card">
+ <div class="photo"><img src="${p.photo}" alt="${p.name}" loading="lazy" onerror="this.style.opacity='.15'"><span class="discount">-${Math.round((1-p.price/p.old)*100)}%</span></div>
+ <h3>${p.name}</h3><div class="rating">★★★★★ <small>${p.rating} (${p.reviews})</small></div>
+ <div class="price">${money(p.price)} <span class="old">${money(p.old)}</span></div>
+ <div class="shipping">🚚 Envío de prueba</div>
+ <button class="add" onclick="add(${p.id})">Añadir al carrito</button>
+ </article>`).join("");
 }
-
-function changeQuantity(id, change) {
-  cart[id] = (cart[id] || 0) + change;
-  if (cart[id] <= 0) delete cart[id];
-  renderCart();
+function add(id){cart[id]=(cart[id]||0)+1;renderCart()}
+function qty(id,n){cart[id]=(cart[id]||0)+n;if(cart[id]<=0)delete cart[id];renderCart()}
+function removeItem(id){delete cart[id];renderCart()}
+function renderCart(){
+ const entries=Object.entries(cart),count=entries.reduce((s,[,q])=>s+q,0);
+ const subtotal=entries.reduce((s,[id,q])=>s+products.find(p=>p.id===+id).price*q,0);
+ const shipping=subtotal>0&&subtotal<50?2.99:0;
+ document.getElementById("count").textContent=count;
+ document.getElementById("cartCount").textContent=count;
+ document.getElementById("subtotal").textContent=money(subtotal);
+ document.getElementById("shipping").textContent=money(shipping);
+ document.getElementById("total").textContent=money(subtotal+shipping);
+ document.getElementById("checkout").disabled=count===0;
+ const box=document.getElementById("cartItems");
+ if(!entries.length){box.innerHTML='<div class="empty">Tu carrito está vacío.<br>¡Añade algún producto!</div>';return}
+ box.innerHTML=entries.map(([id,q])=>{const p=products.find(x=>x.id===+id);return `<div class="cart-line">
+ <img class="cart-img" src="${p.photo}" alt="">
+ <div><button class="remove" onclick="removeItem(${p.id})">✕</button><div class="cart-name">${p.name}</div>
+ <div class="cart-price">${money(p.price*q)}</div>
+ <div class="qty"><button onclick="qty(${p.id},-1)">−</button><span>${q}</span><button onclick="qty(${p.id},1)">+</button></div></div></div>`}).join("");
 }
-
-function removeFromCart(id) {
-  delete cart[id];
-  renderCart();
+function finish(){
+ const entries=Object.entries(cart);
+ if(!entries.length)return;
+ const subtotal=entries.reduce((s,[id,q])=>s+products.find(p=>p.id===+id).price*q,0);
+ const total=subtotal+(subtotal>0&&subtotal<50?2.99:0);
+ const order="DS-DEMO-"+Math.floor(10000+Math.random()*90000);
+ alert(`¡Pedido de simulación completado!\\n\\nPedido ficticio: ${order}\\nTotal de ejemplo: ${money(total)}\\n\\nNo se ha cobrado dinero ni se enviará ningún producto.`);
+ cart={};renderCart();
 }
-
-function renderCart() {
-  const entries = Object.entries(cart);
-  const count = entries.reduce((sum, [,qty]) => sum + qty, 0);
-  const subtotal = entries.reduce((sum, [id,qty]) => {
-    const p = products.find(item => item.id === Number(id));
-    return sum + p.price * qty;
-  }, 0);
-  const shipping = subtotal > 0 && subtotal < 50 ? 2.99 : 0;
-  const cartItems = document.getElementById("cartItems");
-
-  document.getElementById("cartCount").textContent = count;
-  document.getElementById("cartTitleCount").textContent = count;
-  document.getElementById("subtotal").textContent = money(subtotal);
-  document.getElementById("shipping").textContent = money(shipping);
-  document.getElementById("total").textContent = money(subtotal + shipping);
-  document.getElementById("checkoutButton").disabled = count === 0;
-
-  if (!entries.length) {
-    cartItems.innerHTML = '<div class="cart-empty">Tu carrito está vacío. ¡Añade algún producto!</div>';
-    return;
-  }
-
-  cartItems.innerHTML = entries.map(([id,qty]) => {
-    const p = products.find(item => item.id === Number(id));
-    return `
-      <div class="cart-item">
-        <div class="cart-thumb">${p.emoji}</div>
-        <div>
-          <button class="remove" onclick="removeFromCart(${p.id})" aria-label="Eliminar ${p.name}">✕</button>
-          <div class="cart-name">${p.name}</div>
-          <div class="cart-price">${money(p.price * qty)}</div>
-          <div class="quantity">
-            <button onclick="changeQuantity(${p.id},-1)" aria-label="Quitar uno">−</button>
-            <span>${qty}</span>
-            <button onclick="changeQuantity(${p.id},1)" aria-label="Añadir uno">+</button>
-          </div>
-        </div>
-      </div>
-    `;
-  }).join("");
-}
-
-function checkout() {
-  const entries = Object.entries(cart);
-  if (!entries.length) {
-    alert("Tu carrito está vacío.");
-    return;
-  }
-
-  const total = entries.reduce((sum, [id,qty]) => {
-    const p = products.find(item => item.id === Number(id));
-    return sum + p.price * qty;
-  }, 0);
-  const shipping = total > 0 && total < 50 ? 2.99 : 0;
-
-  alert(
-    "🎉 ¡Pedido de simulación completado!\\n\\n" +
-    "Número de pedido ficticio: DS-DEMO-" + Math.floor(10000 + Math.random()*90000) +
-    "\\nTotal de ejemplo: " + money(total + shipping) +
-    "\\n\\nNo se ha realizado ningún pago ni se enviará ningún producto. ¡Gracias por probar DaniShop!"
-  );
-
-  cart = {};
-  renderCart();
-}
-
-document.getElementById("searchForm").addEventListener("submit", event => {
-  event.preventDefault();
-  searchTerm = document.getElementById("searchInput").value.trim().toLowerCase();
-  activeCategory = "Todos";
-  renderProducts();
-  document.getElementById("productsSection").scrollIntoView({behavior:"smooth"});
-});
-
-document.getElementById("searchInput").addEventListener("input", event => {
-  searchTerm = event.target.value.trim().toLowerCase();
-  activeCategory = "Todos";
-  renderProducts();
-});
-
-document.querySelectorAll("nav a[data-category]").forEach(link => {
-  link.addEventListener("click", () => filterCategory(link.dataset.category));
-});
-
-document.getElementById("year").textContent = new Date().getFullYear();
-renderProducts();
-renderCart();
+document.getElementById("searchForm").addEventListener("submit",e=>{e.preventDefault();query=document.getElementById("search").value.trim().toLowerCase();render()});
+document.getElementById("search").addEventListener("input",e=>{query=e.target.value.trim().toLowerCase();render()});
+document.getElementById("maxPrice").addEventListener("input",render);
+document.getElementById("sort").addEventListener("change",render);
+document.getElementById("year").textContent=new Date().getFullYear();
+render();renderCart();
 </script>
-
 </body>
 </html>
 ```
