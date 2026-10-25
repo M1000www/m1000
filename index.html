@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DaniShop - Compre como un Millonario | Precios Increíbles</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        temu: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            500: '#ff6600',
+                            600: '#ff5500',
+                            700: '#e64a00',
+                            800: '#cc3300'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    animation: {
+                        'bounce-slow': 'bounce 2s infinite',
+                        'pulse-fast': 'pulse 0.8s infinite',
+                        'spin-slow': 'spin 8s linear infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Estilos personalizados para animaciones y scrollbars */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ff6600;
+            border-radius: 4px;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .wheel-container {
+            transition: transform 4s cubic-bezier(0.15, 0.99, 0.24, 0.99);
+        }
+        @keyframes flashBanner {
+            0%, 100% { background-color: #ff6600; }
+            50% { background-color: #e60000; }
+        }
+        .flash-bg {
+            animation: flashBanner 1.5s infinite;
+        }
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #printable-receipt, #printable-receipt * {
+                visibility: visible;
+            }
+            #printable-receipt {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans text-gray-800 pb-20 md:pb-12 min-h-screen flex flex-col">
+
+    <!-- Top Banner Promocional Estilo Temu -->
+    <div class="flash-bg text-white text-xs md:text-sm font-bold py-2 px-4 text-center flex items-center justify-center gap-2 shadow-md">
+        <i class="fa-solid fa-bolt text-yellow-300 text-base animate-bounce"></i>
+        <span>¡OFERTAS RELÁMPAGO DE HOY! HASTA 90% DE DESCUENTO + ENVÍO GRATIS EN TODO</span>
+        <span class="bg-black/30 px-2 py-0.5 rounded-full font-mono text-yellow-200" id="top-timer">00:14:59</span>
+    </div>
+
+    <!-- Header Principal Sticky -->
+    <header class="sticky top-0 z-40 bg-white shadow-md border-b-2 border-temu-500">
+        <div class="max-w-7xl mx-auto px-2 sm:px-4 py-2">
+            <div class="flex items-center justify-between gap-2 md:gap-4">
+                <!-- Logo -->
+                <a href="#" onclick="resetCategory()" class="flex items-center gap-1 flex-shrink-0">
+                    <div class="bg-temu-600 text-white font-black text-2xl md:text-3xl px-3 py-1 rounded-xl shadow-lg tracking-wider transform -rotate-1 hover:scale-105 transition">
+                        Dani<span class="text-yellow-300">Shop</span>
+                    </div>
+                </a>
+
+                <!-- Buscador en tiempo real -->
+                <div class="flex-1 max-w-2xl relative">
+                    <div class="relative flex items-center">
+                        <input type="text" id="search-input" oninput="handleSearch()" placeholder="Buscar entre +100,000 productos, marcas, moda, gadgets..." 
+                            class="w-full pl-10 pr-24 py-2 text-sm md:text-base border-2 border-temu-500 rounded-full focus:outline-none focus:ring-2 focus:ring-temu-600 bg-gray-50 focus:bg-white transition">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 text-gray-400"></i>
+                        <button onclick="handleSearch()" class="absolute right-1 top-1 bottom-1 bg-temu-600 text-white px-4 md:px-6 rounded-full font-bold hover:bg-temu-700 transition text-sm flex items-center gap-1">
+                            <span>Buscar</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Botones Acciones (Ruleta, Carrito, etc) -->
+                <div class="flex items-center gap-2 sm:gap-4">
+                    <!-- Ruleta -->
+                    <button onclick="openSpinWheel()" class="hidden sm:flex flex-col items-center text-temu-600 hover:scale-105 transition font-bold text-xs">
+                        <div class="w-9 h-9 bg-yellow-400 text-temu-700 rounded-full flex items-center justify-center shadow-md animate-spin-slow">
+                            <i class="fa-solid fa-arrows-spin text-lg"></i>
+                        </div>
+                        <span>Ruleta</span>
+                    </button>
+
+                    <!-- Carrito -->
+                    <button onclick="toggleCartModal()" class="relative bg-temu-50 p-2 md:p-3 rounded-full hover:bg-temu-100 transition border border-temu-500 flex items-center justify-center">
+                        <i class="fa-solid fa-cart-shopping text-xl text-temu-600"></i>
+                        <span id="cart-count" class="absolute -top-1 -right-1 bg-red-600 text-white font-black text-xs w-5 h-5 rounded-full flex items-center justify-center border-2 border-white shadow-md">0</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Navegación por Categorías (Scroll horizontal) -->
+            <nav class="flex items-center gap-2 mt-2 overflow-x-auto hide-scrollbar text-xs md:text-sm font-medium pb-1" id="category-nav">
+                <!-- Se llena dinámicamente -->
+            </nav>
+        </div>
+
+        <!-- Barra Progresiva de Envío Gratis -->
+        <div class="bg-gradient-to-r from-amber-500 via-temu-500 to-orange-600 text-white text-xs py-1.5 px-4">
+            <div class="max-w-7xl mx-auto flex items-center justify-between gap-2">
+                <div class="flex items-center gap-2 flex-1">
+                    <i class="fa-solid fa-truck-fast text-yellow-300 text-sm animate-pulse"></i>
+                    <span id="free-shipping-text" class="font-semibold truncate">¡Añade 15,00€ más para ENVÍO GRATIS exprés!</span>
+                </div>
+                <div class="w-32 sm:w-48 bg-black/20 rounded-full h-2.5 overflow-hidden border border-white/30">
+                    <div id="free-shipping-bar" class="bg-yellow-300 h-full transition-all duration-500" style="width: 30%"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="max-w-7xl mx-auto px-2 sm:px-4 py-4 flex-1 w-full">
+        
+        <!-- Banners Promocionales Estilo Temu -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
+            <div onclick="filterByTag('flash')" class="cursor-pointer bg-gradient-to-r from-red-600 to-temu-600 rounded-2xl p-4 text-white shadow-lg relative overflow-hidden flex items-center justify-between group">
+                <div class="z-10">
+                    <span class="bg-yellow-400 text-black font-black text-xs px-2 py-0.5 rounded-full uppercase tracking-wider">Super Ofertas</span>
+                    <h3 class="text-xl font-extrabold mt-1">SÚPER DESCUENTOS</h3>
+                    <p class="text-xs text-white/90">Suscripción relámpago -92%</p>
+                    <button class="mt-2 bg-white text-temu-700 font-bold text-xs px-3 py-1.5 rounded-full shadow hover:bg-yellow-300 transition">Ver todo &rarr;</button>
+                </div>
+                <i class="fa-solid fa-fire text-6xl text-white/20 absolute -right-2 -bottom-2 group-hover:scale-125 transition duration-300"></i>
+            </div>
+
+            <div onclick="openSpinWheel()" class="cursor-pointer bg-gradient-to-r from-purple-600 to-indigo-600 rounded-2xl p-4 text-white shadow-lg relative overflow-hidden flex items-center justify-between group">
+                <div class="z-10">
+                    <span class="bg-pink-400 text-white font-black text-xs px-2 py-0.5 rounded-full uppercase">Premio Asegurado</span>
+                    <h3 class="text-xl font-extrabold mt-1">RULETA DE REGALOS</h3>
+                    <p class="text-xs text-purple-100">Gana cupones de hasta 100€</p>
+                    <button class="mt-2 bg-yellow-400 text-purple-900 font-bold text-xs px-3 py-1.5 rounded-full shadow hover:bg-yellow-300 transition">Girar Ahora &rarr;</button>
+                </div>
+                <i class="fa-solid fa-dharmachakra text-6xl text-white/20 absolute -right-2 -bottom-2 group-hover:rotate-90 transition duration-500"></i>
+            </div>
+
+            <div onclick="filterByTag('top')" class="cursor-pointer bg-gradient-to-r from-amber-500 to-temu-500 rounded-2xl p-4 text-white shadow-lg relative overflow-hidden flex items-center justify-between group">
+                <div class="z-10">
+                    <span class="bg-black text-white font-black text-xs px-2 py-0.5 rounded-full uppercase">Más Vendidos</span>
+                    <h3 class="text-xl font-extrabold mt-1">TOP 100 TENDENCIAS</h3>
+                    <p class="text-xs text-amber-100">Lo más buscado de la semana</p>
+                    <button class="mt-2 bg-black text-white font-bold text-xs px-3 py-1.5 rounded-full shadow hover:bg-gray-900 transition">Descubrir &rarr;</button>
+                </div>
+                <i class="fa-solid fa-crown text-6xl text-white/20 absolute -right-2 -bottom-2 group-hover:scale-125 transition duration-300"></i>
+            </div>
+        </section>
+
+        <!-- Barra de Filtros Masivos -->
+        <div class="bg-white rounded-2xl p-3 md:p-4 shadow-sm border border-gray-200 mb-6 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-2 flex-wrap">
+                <span class="font-bold text-xs text-gray-500 uppercase tracking-wider flex items-center gap-1">
+                    <i class="fa-solid fa-sliders text-temu-600"></i> Filtros:
+                </span>
+                
+                <!-- Filtro Ordenar -->
+                <select id="sort-select" onchange="applyFilters()" class="bg-gray-100 border border-gray-300 text-xs rounded-xl px-3 py-1.5 font-semibold focus:outline-none focus:ring-2 focus:ring-temu-500">
+                    <option value="popular">Más Populares / Recomendados</option>
+                    <option value="price-asc">Precio: De Menor a Mayor</option>
+                    <option value="price-desc">Precio: De Mayor a Menor</option>
+                    <option value="rating">Mejor Valoración (4.5+)</option>
+                    <option value="discount">Mayor Descuento %</option>
+                </select>
+
+                <!-- Filtro Precio Rango -->
+                <select id="price-range-select" onchange="applyFilters()" class="bg-gray-100 border border-gray-300 text-xs rounded-xl px-3 py-1.5 font-semibold focus:outline-none focus:ring-2 focus:ring-temu-500">
+                    <option value="all">Cualquier Precio</option>
+                    <option value="under5">Menos de 5,00 €</option>
+                    <option value="5to15">Entre 5,00 € y 15,00 €</option>
+                    <option value="15to50">Entre 15,00 € y 50,00 €</option>
+                    <option value="over50">Más de 50,00 €</option>
+                </select>
+
+                <!-- Checkbox Envío Rápido -->
+                <label class="inline-flex items-center gap-1 text-xs font-semibold cursor-pointer bg-gray-100 px-3 py-1.5 rounded-xl border border-gray-300 select-none">
+                    <input type="checkbox" id="fast-shipping-check" onchange="applyFilters()" class="accent-temu-600 rounded">
+                    <span>⚡ Entrega en 24/48h</span>
+                </label>
+            </div>
+
+            <!-- Contador de Productos Disponibles -->
+            <div class="text-xs font-bold text-gray-600 bg-temu-50 px-3 py-1.5 rounded-full border border-temu-200">
+                Mostrando <span id="product-count-badge" class="text-temu-600">0</span> chollos infinitos
+            </div>
+        </div>
+
+        <!-- Grid de Productos -->
+        <div id="products-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4">
+            <!-- Render dinámico -->
+        </div>
+
+        <!-- Loader / Scroll Infinito Indicator -->
+        <div id="infinite-loader" class="text-center my-8 hidden">
+            <div class="inline-flex items-center gap-3 bg-white px-6 py-3 rounded-full shadow-lg border border-gray-200">
+                <i class="fa-solid fa-circle-notch animate-spin text-temu-600 text-2xl"></i>
+                <span class="font-bold text-gray-700 text-sm">Cargando miles de chollos más...</span>
+            </div>
+        </div>
+
+        <!-- Botón Ver Más Manual por si falla el scroll -->
+        <div class="text-center my-8">
+            <button onclick="loadMoreProducts()" class="bg-gradient-to-r from-temu-500 to-temu-700 hover:from-temu-600 hover:to-temu-800 text-white font-extrabold px-8 py-3 rounded-full shadow-lg transform hover:scale-105 transition flex items-center gap-2 mx-auto">
+                <i class="fa-solid fa-plus-circle"></i>
+                <span>Cargar +50 Productos Dinámicos</span>
+            </button>
+        </div>
+    </main>
+
+    <!-- NOTIFICACIÓN DE COMPRA EN TIEMPO REAL (Estilo Temu) -->
+    <div id="toast-social-proof" class="fixed bottom-20 left-4 z-50 bg-white border-2 border-temu-500 rounded-2xl shadow-2xl p-3 flex items-center gap-3 transform -translate-x-full transition-transform duration-500 max-w-xs md:max-w-sm">
+        <img id="toast-img" src="" class="w-12 h-12 rounded-xl object-cover border border-gray-200" alt="Producto">
+        <div class="text-xs">
+            <p class="font-bold text-gray-900 truncate" id="toast-title">Auriculares Bluetooth Pro</p>
+            <p class="text-temu-600 font-extrabold" id="toast-price">3,49 € <span class="line-through text-gray-400 font-normal">29,99 €</span></p>
+            <p class="text-[10px] text-gray-500"><i class="fa-solid fa-check-circle text-green-500"></i> Comprado por <span font-semibold id="toast-user">Carlos G. (Madrid)</span> hace <span id="toast-time">3s</span></p>
+        </div>
+        <button onclick="closeToast()" class="text-gray-400 hover:text-black ml-auto self-start text-xs"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <!-- MODAL DETALLE DE PRODUCTO (Opciones Talla / Color / Opiniones) -->
+    <div id="product-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-2 sm:p-4 overflow-y-auto">
+        <div class="bg-white rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative border-4 border-temu-500 animate-fadeIn">
+            <button onclick="closeProductModal()" class="absolute top-3 right-3 bg-gray-200 hover:bg-gray-300 rounded-full w-9 h-9 flex items-center justify-center z-10 transition">
+                <i class="fa-solid fa-xmark text-lg text-gray-700"></i>
+            </button>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 md:p-6" id="modal-product-content">
+                <!-- Se inyecta dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL RULETA DE DESCUENTOS -->
+    <div id="wheel-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 text-center relative border-4 border-yellow-400 shadow-2xl">
+            <button onclick="closeWheelModal()" class="absolute top-3 right-3 bg-gray-200 hover:bg-gray-300 rounded-full w-8 h-8 flex items-center justify-center z-10">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="text-center mb-4">
+                <span class="bg-red-600 text-white font-black text-xs px-3 py-1 rounded-full uppercase tracking-wider animate-pulse">¡GIRA Y GANA!</span>
+                <h2 class="text-2xl font-black text-gray-900 mt-2">RULETA DANI<span class="text-temu-600">SHOP</span></h2>
+                <p class="text-xs text-gray-600">Premio 100% garantizado para tu compra de hoy</p>
+            </div>
+
+            <!-- Ruleta Gráfica -->
+            <div class="relative w-64 h-64 mx-auto my-4 overflow-hidden rounded-full border-8 border-yellow-400 shadow-xl bg-gradient-to-tr from-temu-500 via-yellow-500 to-red-500 flex items-center justify-center">
+                <!-- Marcador arriba -->
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 z-20 text-3xl text-red-600 drop-shadow">
+                    <i class="fa-solid fa-caret-down"></i>
+                </div>
+                
+                <div id="wheel-spinner" class="wheel-container w-full h-full rounded-full flex items-center justify-center relative">
+                    <div class="absolute inset-0 flex items-center justify-center font-black text-white text-lg rotate-0">50% OFF</div>
+                    <div class="absolute inset-0 flex items-center justify-center font-black text-yellow-300 text-lg rotate-45">10€ GRATIS</div>
+                    <div class="absolute inset-0 flex items-center justify-center font-black text-white text-lg rotate-90">90% OFF</div>
+                    <div class="absolute inset-0 flex items-center justify-center font-black text-yellow-200 text-lg rotate-135">ENVIO GRATIS</div>
+                    <div class="absolute inset-0 flex items-center justify-center font-black text-white text-lg rotate-180">30% OFF</div>
+                    <div class="absolute inset-0 flex items-center justify-center font-black text-yellow-300 text-lg rotate-225">20€ CUPÓN</div>
+                    <div class="absolute inset-0 flex items-center justify-center font-black text-white text-lg rotate-270">70% OFF</div>
+                    <div class="absolute inset-0 flex items-center justify-center font-black text-yellow-200 text-lg rotate-315">REGALO EXTRA</div>
+                </div>
+
+                <button id="spin-btn" onclick="spinWheelAction()" class="absolute z-30 w-16 h-16 bg-white border-4 border-temu-600 text-temu-700 font-black rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition text-xs leading-tight">
+                    GIRAR
+                </button>
+            </div>
+
+            <div id="wheel-result" class="hidden mt-4 p-3 bg-yellow-100 rounded-2xl border border-yellow-400 text-yellow-900 font-bold text-sm">
+                🎉 ¡FELICIDADES! Has ganado: <span id="wheel-prize-text" class="text-red-600 font-black text-base">CUPÓN -90%</span>
+                <p class="text-xs font-normal mt-1">El cupón <span class="font-mono bg-white px-2 py-0.5 rounded border border-yellow-500 font-bold">DANI90</span> ha sido copiado y aplicado a tu carrito.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL CARRITO DE COMPRAS -->
+    <div id="cart-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex justify-end">
+        <div class="bg-white w-full max-w-md h-full shadow-2xl flex flex-col justify-between animate-slideLeft">
+            <!-- Header Carrito -->
+            <div class="p-4 bg-temu-600 text-white flex items-center justify-between shadow">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-cart-shopping text-xl"></i>
+                    <h3 class="font-bold text-lg">Mi Carrito DaniShop</h3>
+                </div>
+                <button onclick="toggleCartModal()" class="text-white hover:text-yellow-300 text-xl font-bold">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Lista de Productos -->
+            <div class="p-4 flex-1 overflow-y-auto space-y-3" id="cart-items-container">
+                <!-- Se llena dinámicamente -->
+            </div>
+
+            <!-- Sección Cupones y Resumen de Pago -->
+            <div class="p-4 border-t border-gray-200 bg-gray-50 space-y-3">
+                <!-- Input Cupón -->
+                <div class="flex gap-2">
+                    <input type="text" id="coupon-input" placeholder="Código de Cupón (ej: DANI90)" class="flex-1 px-3 py-2 border rounded-xl text-xs font-bold uppercase focus:outline-none focus:ring-2 focus:ring-temu-500">
+                    <button onclick="applyCoupon()" class="bg-gray-800 text-white font-bold px-4 py-2 rounded-xl text-xs hover:bg-black transition">Aplicar</button>
+                </div>
+                <div id="coupon-message" class="text-xs font-bold hidden"></div>
+
+                <!-- Desglose de Gastos -->
+                <div class="space-y-1 text-xs">
+                    <div class="flex justify-between text-gray-600">
+                        <span>Subtotal Productos:</span>
+                        <span id="cart-subtotal" class="font-semibold">0,00 €</span>
+                    </div>
+                    <div class="flex justify-between text-gray-600">
+                        <span>Descuentos DaniShop:</span>
+                        <span id="cart-discount" class="font-semibold text-green-600">-0,00 €</span>
+                    </div>
+                    <div class="flex justify-between text-gray-600">
+                        <span>Gastos de Envío:</span>
+                        <span id="cart-shipping" class="font-semibold text-temu-600">¡GRATIS!</span>
+                    </div>
+                    <div class="flex justify-between text-sm font-black text-gray-900 pt-2 border-t border-gray-200">
+                        <span>TOTAL (IVA Incluido):</span>
+                        <span id="cart-total" class="text-temu-600 text-lg">0,00 €</span>
+                    </div>
+                </div>
+
+                <!-- Botón Finalizar Compra -->
+                <button onclick="processCheckout()" class="w-full bg-gradient-to-r from-temu-600 to-red-600 text-white font-black py-3 rounded-2xl shadow-lg hover:from-temu-700 hover:to-red-700 transition text-base flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-lock"></i>
+                    <span>PAGAR CON SEGURIDAD (TICKET)</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL RECIBO / TICKET DE COMPRA IMPRIMIBLE REALISTA -->
+    <div id="receipt-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-2 sm:p-4 overflow-y-auto">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative border-4 border-dashed border-gray-300 font-mono text-gray-800" id="printable-receipt">
+            
+            <button onclick="closeReceiptModal()" class="absolute top-3 right-3 bg-gray-200 hover:bg-gray-300 rounded-full w-8 h-8 flex items-center justify-center z-10 print:hidden">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Encabezado Recibo -->
+            <div class="text-center border-b-2 border-dashed border-gray-400 pb-4 mb-4">
+                <h1 class="text-2xl font-black tracking-widest text-black">DANISHOP EXPRESS</h1>
+                <p class="text-xs text-gray-500">DaniShop Logistics & Retail S.L.</p>
+                <p class="text-xs text-gray-500">CIF: B-987654321 • Madrid, España</p>
+                <div class="mt-2 bg-black text-white py-1 px-3 inline-block rounded font-bold text-xs">
+                    RECIBO OFICIAL DE COMPRA
+                </div>
+            </div>
+
+            <!-- Datos de Transacción -->
+            <div class="text-xs space-y-1 mb-4 border-b border-gray-200 pb-3">
+                <div class="flex justify-between">
+                    <span class="text-gray-500">Nº Pedido:</span>
+                    <span id="receipt-order-id" class="font-bold">#DS-84739201</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-500">Código Seguimiento:</span>
+                    <span id="receipt-tracking-code" class="font-bold text-temu-600">ES-99281-TEMU</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-500">Fecha y Hora:</span>
+                    <span id="receipt-date" class="font-bold">25/10/2026 - 14:32</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-500">Estado Pago:</span>
+                    <span class="font-bold text-green-600">PAID / PAGADO</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-500">Método de Pago:</span>
+                    <span class="font-bold">Tarjeta / Express Checkout</span>
+                </div>
+            </div>
+
+            <!-- Detalle de Productos -->
+            <div class="mb-4">
+                <p class="font-bold text-xs mb-2 uppercase border-b border-gray-300 pb-1">Productos Comprados:</p>
+                <div id="receipt-items-list" class="space-y-2 text-xs">
+                    <!-- Dinámico -->
+                </div>
+            </div>
+
+            <!-- Desglose Económico e IVA -->
+            <div class="border-t-2 border-dashed border-gray-400 pt-3 text-xs space-y-1.5 mb-4">
+                <div class="flex justify-between">
+                    <span>Subtotal Importe Neto:</span>
+                    <span id="receipt-net-subtotal">0,00 €</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>IVA Aplicado (21%):</span>
+                    <span id="receipt-vat-amount">0,00 €</span>
+                </div>
+                <div class="flex justify-between text-green-700">
+                    <span>Ahorro Cupones / Promos:</span>
+                    <span id="receipt-discount-amount">-0,00 €</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>Gastos Envio Exprés:</span>
+                    <span>0,00 € (GRATIS)</span>
+                </div>
+                <div class="flex justify-between text-base font-black border-t border-gray-300 pt-2 text-black">
+                    <span>TOTAL PAGADO:</span>
+                    <span id="receipt-grand-total" class="text-temu-700">0,00 €</span>
+                </div>
+            </div>
+
+            <!-- Código de Barras / QR Simulación -->
+            <div class="text-center pt-2 border-t border-gray-200">
+                <div class="inline-block bg-black text-white font-mono tracking-widest px-4 py-2 font-bold text-sm rounded">
+                    |||||||| ||| ||||||| |||||| |||||
+                </div>
+                <p class="text-[10px] text-gray-500 mt-1">¡Gracias por comprar en DaniShop! Conserve este recibo para garantía.</p>
+            </div>
+
+            <!-- Botones Imprimir -->
+            <div class="mt-6 flex gap-2 print:hidden">
+                <button onclick="window.print()" class="flex-1 bg-gray-900 text-white font-bold py-2.5 rounded-xl text-xs hover:bg-black transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-print"></i> Imprimir Ticket
+                </button>
+                <button onclick="closeReceiptModal()" class="flex-1 bg-temu-600 text-white font-bold py-2.5 rounded-xl text-xs hover:bg-temu-700 transition">
+                    Aceptar y Seguir Comprando
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navegación Inferior Móvil -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-30 flex justify-around py-2 shadow-lg">
+        <button onclick="resetCategory()" class="flex flex-col items-center text-temu-600 text-xs font-bold">
+            <i class="fa-solid fa-house text-lg"></i>
+            <span>Inicio</span>
+        </button>
+        <button onclick="openSpinWheel()" class="flex flex-col items-center text-gray-600 text-xs font-bold">
+            <i class="fa-solid fa-gift text-lg text-yellow-500"></i>
+            <span>Premios</span>
+        </button>
+        <button onclick="toggleCartModal()" class="flex flex-col items-center text-gray-600 text-xs font-bold relative">
+            <i class="fa-solid fa-cart-shopping text-lg text-temu-600"></i>
+            <span id="mobile-cart-count" class="absolute -top-1 right-2 bg-red-600 text-white font-black text-[10px] w-4 h-4 rounded-full flex items-center justify-center">0</span>
+            <span>Carrito</span>
+        </button>
+    </div>
+
+    <!-- SCRIPTS LÓGICA DE NEGOCIO Y GENERACIÓN DE PRODUCTOS INFINITOS -->
+    <script>
+        // --- CATEGORÍAS DETALLADAS ---
+        const CATEGORIES = [
+            { id: 'all', name: '🔥 Todo', icon: 'fa-fire' },
+            { id: 'mujer', name: '👗 Moda Mujer', icon: 'fa-shirt' },
+            { id: 'hombre', name: '👔 Moda Hombre', icon: 'fa-user-tie' },
+            { id: 'zapatillas', name: '👟 Zapatillas de Marca', icon: 'fa-shoe-prints' },
+            { id: 'electronica', name: '🎧 Electrónica', icon: 'fa-headphones' },
+            { id: 'gadgets', name: '📱 Gadgets & Tech', icon: 'fa-mobile-screen' },
+            { id: 'hogar', name: '🏠 Hogar y Cocina', icon: 'fa-house-user' },
+            { id: 'belleza', name: '💄 Belleza & Cuidado', icon: 'fa-wand-magic-sparkles' },
+            { id: 'accesorios', name: '⌚ Accesorios', icon: 'fa-clock' },
+            { id: 'deportes', name: '⚽ Deportes & Fit', icon: 'fa-futbol' },
+            { id: 'juguetes', name: '🧸 Juguetes & Niños', icon: 'fa-gamepad' },
+            { id: 'automovil', name: '🚗 Automóvil & Moto', icon: 'fa-car' }
+        ];
+
+        // --- BASES DE DATOS PARA GENERACIÓN INFINITA DIVERSA ---
+        const PRODUCT_TEMPLATES = {
+            mujer: [
+                { name: 'Vestido Estampado Floral Verano Light', price: 6.49, oldPrice: 35.00, img: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=400' },
+                { name: 'Chaqueta Abrigo Elegante de Punto', price: 12.99, oldPrice: 60.00, img: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400' },
+                { name: 'Conjunto Deportivo Seamless Yoga Pro', price: 8.99, oldPrice: 42.00, img: 'https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=400' },
+                { name: 'Bolso de Hombro Casual Multi-Bolsillos', price: 4.89, oldPrice: 28.00, img: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400' }
+            ],
+            hombre: [
+                { name: 'Camiseta Algodón Premium Slim Fit', price: 3.99, oldPrice: 20.00, img: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=400' },
+                { name: 'Sudadera Térmica con Capucha Urban', price: 9.89, oldPrice: 48.00, img: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=400' },
+                { name: 'Pantalón Vaquero Elástico Confort Ultra', price: 11.49, oldPrice: 55.00, img: 'https://images.unsplash.com/photo-1542272604-780c36856842?w=400' },
+                { name: 'Chaqueta Impermeable Cortavientos', price: 14.99, oldPrice: 70.00, img: 'https://images.unsplash.com/photo-1544441893-675973e31985?w=400' }
+            ],
+            zapatillas: [
+                { name: 'Zapatillas Running Amortiguación Aérea Pro', price: 16.99, oldPrice: 89.00, img: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400' },
+                { name: 'Deportivas Casuales Blancas Malla Transpirable', price: 11.89, oldPrice: 65.00, img: 'https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=400' },
+                { name: 'Zapatillas Béisbol & Trail Antideslizantes', price: 19.99, oldPrice: 95.00, img: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=400' },
+                { name: 'Sneakers Estilo Retro High-Top Streetwear', price: 18.49, oldPrice: 80.00, img: 'https://images.unsplash.com/photo-1552346154-21d32810aba3?w=400' }
+            ],
+            electronica: [
+                { name: 'Auriculares Inalámbricos Bluetooth 5.3 TWS', price: 3.49, oldPrice: 29.99, img: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=400' },
+                { name: 'Reloj Inteligente Smartwatch Pantalla HD HD-9', price: 9.99, oldPrice: 59.99, img: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400' },
+                { name: 'Altavoz Portátil Impermeable Bass Boost', price: 7.89, oldPrice: 40.00, img: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400' },
+                { name: 'Cámara de Vigilancia WiFi HD 1080P Visión Nocturna', price: 12.49, oldPrice: 65.00, img: 'https://images.unsplash.com/photo-1557862921-37829c790f19?w=400' }
+            ],
+            gadgets: [
+                { name: 'Mini Impresora Térmica Portátil para Fotos y Notas', price: 13.99, oldPrice: 45.00, img: 'https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?w=400' },
+                { name: 'Proyector LED HD de Bolsillo Cine en Casa', price: 29.99, oldPrice: 120.00, img: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400' },
+                { name: 'Batería Externa Power Bank 20.000mAh Carga Rápida', price: 8.99, oldPrice: 38.00, img: 'https://images.unsplash.com/photo-1609592424109-dd9892f1b177?w=400' },
+                { name: 'Luz de Lectura LED Flex Flexo USB', price: 1.99, oldPrice: 12.00, img: 'https://images.unsplash.com/photo-1507499739999-097706ad8914?w=400' }
+            ],
+            hogar: [
+                { name: 'Humidificador Ultrasónico RGB Difusor de Aromas', price: 4.99, oldPrice: 25.00, img: 'https://images.unsplash.com/photo-1546554137-f86b9593a222?w=400' },
+                { name: 'Set 6 Organizadores de Armario y Ropa', price: 5.89, oldPrice: 22.00, img: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400' },
+                { name: 'Picador Súper Rápido de Verduras Manual 500ml', price: 3.29, oldPrice: 18.00, img: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=400' },
+                { name: 'Luz Sensor de Movimiento LED para Pasillos', price: 2.19, oldPrice: 14.00, img: 'https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=400' }
+            ],
+            belleza: [
+                { name: 'Limpiador Facial Ultrasónico Poros Profundos', price: 4.49, oldPrice: 30.00, img: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400' },
+                { name: 'Kit Profesional 12 Brochas Maquillaje Suaves', price: 3.99, oldPrice: 24.00, img: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400' },
+                { name: 'Rizador Automático de Pelo Cerámica Anti-Quemaduras', price: 15.99, oldPrice: 68.00, img: 'https://images.unsplash.com/photo-1560750588-73207b1ef5b8?w=400' }
+            ],
+            accesorios: [
+                { name: 'Gafas de Sol Polarizadas Estilo Aviador Clásico', price: 2.99, oldPrice: 25.00, img: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=400' },
+                { name: 'Reloj Analógico Elegante Cuero Hombre/Mujer', price: 5.49, oldPrice: 35.00, img: 'https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=400' },
+                { name: 'Mochila Antirrobo con Puerto de Carga USB', price: 9.99, oldPrice: 45.00, img: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400' }
+            ],
+            deportes: [
+                { name: 'Bandas de Resistencia Fitness Set 5 Niveles', price: 3.19, oldPrice: 19.00, img: 'https://images.unsplash.com/photo-1598289431512-b97b0917affc?w=400' },
+                { name: 'Botella de Agua Motivacional 2 Litros Libre BPA', price: 4.89, oldPrice: 22.00, img: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400' }
+            ],
+            juguetes: [
+                { name: 'Dron Mini con Cámara HD RC Plegable Control Fácil', price: 19.99, oldPrice: 85.00, img: 'https://images.unsplash.com/photo-1527977966376-1c8408f9f108?w=400' },
+                { name: 'Consola Retro Portátil +500 Juegos Clásicos', price: 8.49, oldPrice: 39.00, img: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400' }
+            ],
+            automovil: [
+                { name: 'Compresor de Aire Portátil Inalámbrico Ruedas', price: 16.49, oldPrice: 60.00, img: 'https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=400' },
+                { name: 'Aspiradora de Coche Potente Carga USB 8000PA', price: 7.99, oldPrice: 35.00, img: 'https://images.unsplash.com/photo-1558317374-067fb5f30001?w=400' }
+            ]
+        };
+
+        const NAMES_POOL = ['Carlos', 'Ana', 'Miguel', 'Laura', 'David', 'Sofía', 'Javier', 'Elena', 'Pablo', 'Lucía', 'Marcos', 'Marta', 'Alejandro', 'Carmen'];
+        const CITIES_POOL = ['Madrid', 'Barcelona', 'Valencia', 'Sevilla', 'Zaragoza', 'Málaga', 'Murcia', 'Bilbao', 'Alicante', 'Córdoba'];
+
+        // --- ESTADO GLOBAL DE LA APLICACIÓN ---
+        let allGeneratedProducts = [];
+        let filteredProducts = [];
+        let cart = [];
+        let appliedCoupon = null;
+        let activeCategory = 'all';
+        let itemsLoadedCount = 0;
+        const ITEMS_PER_PAGE = 30;
+
+        // --- INICIALIZACIÓN DE LA TIENDA ---
+        window.onload = function() {
+            renderCategoryNav();
+            generateMassiveCatalog(300); // Genera catálogo inicial de 300 productos
+            applyFilters();
+            startTimersAndNotifications();
+        };
+
+        // Generador dinámico de MILES de productos
+        function generateMassiveCatalog(count) {
+            const categoriesKeys = Object.keys(PRODUCT_TEMPLATES);
+            
+            for (let i = 0; i < count; i++) {
+                const cat = categoriesKeys[Math.floor(Math.random() * categoriesKeys.length)];
+                const templates = PRODUCT_TEMPLATES[cat];
+                const base = templates[Math.floor(Math.random() * templates.length)];
+                
+                // Variación aleatoria
+                const randomId = allGeneratedProducts.length + 1;
+                const priceVariation = (Math.random() * 0.4 + 0.8); // 80% a 120% del precio base
+                const price = +(base.price * priceVariation).toFixed(2);
+                const oldPrice = +(price * (Math.random() * 3 + 3)).toFixed(2);
+                const rating = +(Math.random() * 1.2 + 3.8).toFixed(1);
+                const sales = Math.floor(Math.random() * 9000 + 500);
+
+                allGeneratedProducts.push({
+                    id: randomId,
+                    category: cat,
+                    name: `${base.name} #${randomId}`,
+                    price: price,
+                    oldPrice: oldPrice,
+                    rating: rating,
+                    reviewsCount: Math.floor(sales / 4),
+                    sales: sales,
+                    img: base.img,
+                    isFlash: Math.random() < 0.3,
+                    isTop: sales > 5000,
+                    fastShipping: Math.random() < 0.6,
+                    sizes: ['S', 'M', 'L', 'XL', 'Única'],
+                    colors: ['Negro', 'Blanco', 'Naranja Dani', 'Azul', 'Rojo']
+                });
+            }
+            document.getElementById('product-count-badge').innerText = allGeneratedProducts.length;
+        }
+
+        // Renderizar barra de navegación de categorías
+        function renderCategoryNav() {
+            const nav = document.getElementById('category-nav');
+            nav.innerHTML = CATEGORIES.map(c => `
+                <button onclick="selectCategory('${c.id}')" id="cat-btn-${c.id}" class="cat-btn flex items-center gap-1.5 px-3 py-1.5 rounded-full whitespace-nowrap transition font-bold ${c.id === 'all' ? 'bg-temu-600 text-white shadow' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}">
+                    <i class="fa-solid ${c.icon}"></i>
+                    <span>${c.name}</span>
+                </button>
+            `).join('');
+        }
+
+        // Selección de categoría
+        function selectCategory(catId) {
+            activeCategory = catId;
+            document.querySelectorAll('.cat-btn').forEach(b => {
+                b.classList.remove('bg-temu-600', 'text-white', 'shadow');
+                b.classList.add('bg-gray-100', 'text-gray-700');
+            });
+            const activeBtn = document.getElementById(`cat-btn-${catId}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-gray-100', 'text-gray-700');
+                activeBtn.classList.add('bg-temu-600', 'text-white', 'shadow');
+            }
+            applyFilters();
+        }
+
+        function resetCategory() {
+            selectCategory('all');
+            document.getElementById('search-input').value = '';
+        }
+
+        // APLICAR FILTROS Y BÚSQUEDA EN TIEMPO REAL
+        function applyFilters() {
+            const searchQuery = document.getElementById('search-input').value.toLowerCase();
+            const sortVal = document.getElementById('sort-select').value;
+            const priceRange = document.getElementById('price-range-select').value;
+            const fastShipOnly = document.getElementById('fast-shipping-check').checked;
+
+            filteredProducts = allGeneratedProducts.filter(p => {
+                // Filtro Categoría
+                if (activeCategory !== 'all' && p.category !== activeCategory) return false;
+                
+                // Filtro Búsqueda
+                if (searchQuery && !p.name.toLowerCase().includes(searchQuery)) return false;
+
+                // Filtro Envío Rápido
+                if (fastShipOnly && !p.fastShipping) return false;
+
+                // Filtro Rango de Precio
+                if (priceRange === 'under5' && p.price >= 5) return false;
+                if (priceRange === '5to15' && (p.price < 5 || p.price > 15)) return false;
+                if (priceRange === '15to50' && (p.price < 15 || p.price > 50)) return false;
+                if (priceRange === 'over50' && p.price <= 50) return false;
+
+                return true;
+            });
+
+            // Ordenación
+            if (sortVal === 'price-asc') filteredProducts.sort((a,b) => a.price - b.price);
+            if (sortVal === 'price-desc') filteredProducts.sort((a,b) => b.price - a.price);
+            if (sortVal === 'rating') filteredProducts.sort((a,b) => b.rating - a.rating);
+            if (sortVal === 'discount') filteredProducts.sort((a,b) => ((b.oldPrice - b.price)/b.oldPrice) - ((a.oldPrice - a.price)/a.oldPrice));
+            if (sortVal === 'popular') filteredProducts.sort((a,b) => b.sales - a.sales);
+
+            // Reiniciar scroll render
+            itemsLoadedCount = 0;
+            document.getElementById('products-grid').innerHTML = '';
+            loadMoreProducts();
+        }
+
+        // Renderizar Productos Dinámicos (Paginación / Infinita)
+        function loadMoreProducts() {
+            const grid = document.getElementById('products-grid');
+            const nextBatch = filteredProducts.slice(itemsLoadedCount, itemsLoadedCount + ITEMS_PER_PAGE);
+
+            if (nextBatch.length === 0 && itemsLoadedCount === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-12 text-center">
+                        <i class="fa-solid fa-box-open text-5xl text-gray-300 mb-3"></i>
+                        <p class="font-bold text-gray-600 text-lg">No hemos encontrado productos con estos filtros</p>
+                        <button onclick="resetCategory()" class="mt-3 bg-temu-600 text-white font-bold px-4 py-2 rounded-xl text-xs">Ver Todos los Productos</button>
+                    </div>
+                `;
+                return;
+            }
+
+            nextBatch.forEach(p => {
+                const discount = Math.round(((p.oldPrice - p.price) / p.oldPrice) * 100);
+                const cardHtml = `
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col justify-between group cursor-pointer relative" onclick="openProductModal(${p.id})">
+                        <!-- Badges estilo Temu -->
+                        <div class="absolute top-2 left-2 z-10 flex flex-col gap-1">
+                            <span class="bg-red-600 text-white font-black text-[10px] px-2 py-0.5 rounded-md shadow uppercase">
+                                -${discount}%
+                            </span>
+                            ${p.isFlash ? '<span class="bg-amber-500 text-black font-extrabold text-[9px] px-1.5 py-0.5 rounded shadow">⚡ OFERTA</span>' : ''}
+                        </div>
+
+                        <!-- Imagen del producto -->
+                        <div class="relative w-full pt-[100%] overflow-hidden bg-gray-50">
+                            <img src="${p.img}" alt="${p.name}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition duration-500 loading="lazy" onerror="this.src='https://placehold.co/400x400/ff6600/ffffff?text=DaniShop'">
+                            ${p.fastShipping ? '<div class="absolute bottom-1 left-1 bg-black/70 text-yellow-300 text-[9px] font-bold px-1.5 py-0.5 rounded flex items-center gap-1"><i class="fa-solid fa-bolt"></i> 24h</div>' : ''}
+                        </div>
+
+                        <!-- Info del Producto -->
+                        <div class="p-2.5 flex-1 flex flex-col justify-between">
+                            <div>
+                                <h4 class="font-medium text-xs text-gray-800 line-clamp-2 leading-snug group-hover:text-temu-600 transition">${p.name}</h4>
+                                <div class="flex items-center gap-1 mt-1 text-[11px] text-amber-500 font-bold">
+                                    <i class="fa-solid fa-star"></i>
+                                    <span>${p.rating}</span>
+                                    <span class="text-gray-400 font-normal">(${p.sales}+ vend.)</span>
+                                </div>
+                            </div>
+
+                            <div class="mt-2 pt-2 border-t border-gray-100 flex items-end justify-between">
+                                <div>
+                                    <div class="flex items-baseline gap-1">
+                                        <span class="text-lg font-black text-temu-600 leading-none">${p.price.toFixed(2)} €</span>
+                                        <span class="text-[10px] text-gray-400 line-through">${p.oldPrice.toFixed(2)} €</span>
+                                    </div>
+                                    <span class="text-[9px] text-green-600 font-bold">Envío GRATIS</span>
+                                </div>
+                                <button onclick="event.stopPropagation(); addToCartDirect(${p.id})" class="bg-temu-50 hover:bg-temu-600 text-temu-600 hover:text-white p-2 rounded-full border border-temu-500 transition shadow-sm flex items-center justify-center">
+                                    <i class="fa-solid fa-cart-plus text-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                grid.insertAdjacentHTML('beforeend', cardHtml);
+            });
+
+            itemsLoadedCount += nextBatch.length;
+
+            // Generar más productos en background si se están acabando
+            if (allGeneratedProducts.length - itemsLoadedCount < 50) {
+                generateMassiveCatalog(150);
+            }
+        }
+
+        // Scroll Infinito
+        window.addEventListener('scroll', () => {
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 800) {
+                if (itemsLoadedCount < filteredProducts.length) {
+                    loadMoreProducts();
+                }
+            }
+        });
+
+        function handleSearch() {
+            applyFilters();
+        }
+
+        function filterByTag(tag) {
+            if (tag === 'flash') selectCategory('all');
+            if (tag === 'top') {
+                document.getElementById('sort-select').value = 'popular';
+                applyFilters();
+            }
+        }
+
+        // --- MODAL DETALLE DE PRODUCTO Y COMPRA ---
+        function openProductModal(id) {
+            const product = allGeneratedProducts.find(p => p.id === id);
+            if (!product) return;
+
+            const modal = document.getElementById('product-modal');
+            const container = document.getElementById('modal-product-content');
+
+            const discount = Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100);
+
+            container.innerHTML = `
+                <div class="space-y-3">
+                    <div class="rounded-2xl overflow-hidden border border-gray-200 relative bg-gray-50">
+                        <img src="${product.img}" class="w-full h-80 object-cover" alt="${product.name}">
+                        <span class="absolute top-3 left-3 bg-red-600 text-white font-black text-xs px-2.5 py-1 rounded-md shadow">
+                            OFERTA -${discount}%
+                        </span>
+                    </div>
+                    <div class="grid grid-cols-4 gap-2">
+                        <img src="${product.img}" class="h-16 w-full object-cover rounded-xl border-2 border-temu-500 cursor-pointer">
+                        <img src="${product.img}" class="h-16 w-full object-cover rounded-xl border border-gray-200 hover:border-temu-500 cursor-pointer">
+                        <img src="${product.img}" class="h-16 w-full object-cover rounded-xl border border-gray-200 hover:border-temu-500 cursor-pointer">
+                        <img src="${product.img}" class="h-16 w-full object-cover rounded-xl border border-gray-200 hover:border-temu-500 cursor-pointer">
+                    </div>
+                </div>
+
+                <div class="flex flex-col justify-between space-y-4">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="bg-yellow-100 text-yellow-800 text-[10px] font-black px-2 py-0.5 rounded-full border border-yellow-300">⚡ MÁS VENDIDO</span>
+                            <span class="text-xs text-gray-500"><i class="fa-solid fa-shield-halved text-green-600"></i> Garantía de reembolso de 90 días</span>
+                        </div>
+                        <h2 class="text-xl font-extrabold text-gray-900 leading-snug">${product.name}</h2>
+                        
+                        <div class="flex items-center gap-2 mt-2">
+                            <div class="flex text-amber-400 text-sm">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                            </div>
+                            <span class="font-bold text-xs text-gray-800">${product.rating}</span>
+                            <span class="text-xs text-gray-400">(${product.reviewsCount} evaluaciones verificadas)</span>
+                        </div>
+
+                        <!-- Precio -->
+                        <div class="bg-temu-50 p-3 rounded-2xl border border-temu-200 mt-4 flex items-baseline gap-3">
+                            <span class="text-3xl font-black text-temu-600">${product.price.toFixed(2)} €</span>
+                            <span class="text-sm text-gray-400 line-through">${product.oldPrice.toFixed(2)} €</span>
+                            <span class="text-xs font-bold text-red-600 bg-red-100 px-2 py-0.5 rounded">Ahorras ${(product.oldPrice - product.price).toFixed(2)} €</span>
+                        </div>
+
+                        <!-- Selección Opciones Talla / Color -->
+                        <div class="mt-4 space-y-3">
+                            <div>
+                                <label class="text-xs font-bold text-gray-700 block mb-1">Seleccionar Talla / Tamaño:</label>
+                                <div class="flex gap-2 flex-wrap" id="size-selector">
+                                    ${product.sizes.map((s, idx) => `
+                                        <button onclick="selectOption(this, 'size')" class="option-btn text-xs font-bold px-3 py-1.5 rounded-xl border ${idx === 0 ? 'border-temu-600 bg-temu-50 text-temu-600' : 'border-gray-300 text-gray-700 hover:border-gray-400'}">${s}</button>
+                                    `).join('')}
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="text-xs font-bold text-gray-700 block mb-1">Seleccionar Color:</label>
+                                <div class="flex gap-2 flex-wrap" id="color-selector">
+                                    ${product.colors.map((c, idx) => `
+                                        <button onclick="selectOption(this, 'color')" class="option-btn text-xs font-bold px-3 py-1.5 rounded-xl border ${idx === 0 ? 'border-temu-600 bg-temu-50 text-temu-600' : 'border-gray-300 text-gray-700 hover:border-gray-400'}">${c}</button>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botón Añadir -->
+                    <div class="pt-4 border-t border-gray-200">
+                        <button onclick="addToCartModal(${product.id})" class="w-full bg-gradient-to-r from-temu-500 to-temu-700 text-white font-extrabold py-3.5 rounded-2xl shadow-xl hover:from-temu-600 hover:to-temu-800 transition text-base flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-cart-shopping text-lg"></i>
+                            <span>AÑADIR AL CARRITO</span>
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeProductModal() {
+            document.getElementById('product-modal').classList.add('hidden');
+        }
+
+        function selectOption(btn, type) {
+            const parent = btn.parentElement;
+            parent.querySelectorAll('.option-btn').forEach(b => {
+                b.classList.remove('border-temu-600', 'bg-temu-50', 'text-temu-600');
+                b.classList.add('border-gray-300', 'text-gray-700');
+            });
+            btn.classList.remove('border-gray-300', 'text-gray-700');
+            btn.classList.add('border-temu-600', 'bg-temu-50', 'text-temu-600');
+        }
+
+        // --- CARRITO DE COMPRAS LÓGICA ---
+        function addToCartDirect(id) {
+            const product = allGeneratedProducts.find(p => p.id === id);
+            if (!product) return;
+            
+            addToCart({
+                ...product,
+                selectedSize: product.sizes[0],
+                selectedColor: product.colors[0],
+                cartQty: 1
+            });
+        }
+
+        function addToCartModal(id) {
+            const product = allGeneratedProducts.find(p => p.id === id);
+            if (!product) return;
+
+            const selectedSize = document.querySelector('#size-selector .border-temu-600')?.innerText || product.sizes[0];
+            const selectedColor = document.querySelector('#color-selector .border-temu-600')?.innerText || product.colors[0];
+
+            addToCart({
+                ...product,
+                selectedSize: selectedSize,
+                selectedColor: selectedColor,
+                cartQty: 1
+            });
+
+            closeProductModal();
+        }
+
+        function addToCart(item) {
+            const existingIndex = cart.findIndex(c => c.id === item.id && c.selectedSize === item.selectedSize && c.selectedColor === item.selectedColor);
+            if (existingIndex > -1) {
+                cart[existingIndex].cartQty += 1;
+            } else {
+                cart.push(item);
+            }
+
+            updateCartUI();
+            toggleCartModal(true); // Abrir carrito para feedback rápido
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function changeQty(index, delta) {
+            cart[index].cartQty += delta;
+            if (cart[index].cartQty <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const container = document.getElementById('cart-items-container');
+            const cartCountBadge = document.getElementById('cart-count');
+            const mobileCartBadge = document.getElementById('mobile-cart-count');
+
+            const totalItems = cart.reduce((sum, item) => sum + item.cartQty, 0);
+            cartCountBadge.innerText = totalItems;
+            mobileCartBadge.innerText = totalItems;
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12">
+                        <i class="fa-solid fa-cart-arrow-down text-5xl text-gray-300 mb-3"></i>
+                        <p class="font-bold text-gray-600">Tu carrito está vacío</p>
+                        <p class="text-xs text-gray-400 mt-1">¡Añade chollos con hasta 90% de descuento!</p>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = cart.map((item, idx) => `
+                    <div class="flex items-center gap-3 bg-gray-50 p-2.5 rounded-2xl border border-gray-200">
+                        <img src="${item.img}" class="w-16 h-16 object-cover rounded-xl border" alt="${item.name}">
+                        <div class="flex-1 text-xs">
+                            <h4 class="font-bold text-gray-800 line-clamp-1">${item.name}</h4>
+                            <p class="text-gray-500 text-[10px]">Var: ${item.selectedSize} / ${item.selectedColor}</p>
+                            <p class="font-black text-temu-600 text-sm mt-0.5">${(item.price * item.cartQty).toFixed(2)} €</p>
+                        </div>
+                        <div class="flex items-center border rounded-xl bg-white overflow-hidden">
+                            <button onclick="changeQty(${idx}, -1)" class="px-2 py-1 bg-gray-100 hover:bg-gray-200 font-bold text-xs">-</button>
+                            <span class="px-2 text-xs font-bold">${item.cartQty}</span>
+                            <button onclick="changeQty(${idx}, 1)" class="px-2 py-1 bg-gray-100 hover:bg-gray-200 font-bold text-xs">+</button>
+                        </div>
+                        <button onclick="removeFromCart(${idx})" class="text-red-500 hover:text-red-700 p-1 text-sm">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </div>
+                `).join('');
+            }
+
+            // Cálculos Totales
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.cartQty), 0);
+            let discount = 0;
+            if (appliedCoupon === 'DANI90') discount = subtotal * 0.9;
+            else if (appliedCoupon === 'DANI50') discount = subtotal * 0.5;
+            else if (appliedCoupon === 'DANI10') discount = 10;
+
+            if (discount > subtotal) discount = subtotal;
+
+            const total = subtotal - discount;
+
+            document.getElementById('cart-subtotal').innerText = `${subtotal.toFixed(2)} €`;
+            document.getElementById('cart-discount').innerText = `-${discount.toFixed(2)} €`;
+            document.getElementById('cart-total').innerText = `${total.toFixed(2)} €`;
+
+            // Actualizar Barra Envío Gratis (Objetivo 15€)
+            const freeThreshold = 15;
+            const progress = Math.min((subtotal / freeThreshold) * 100, 100);
+            document.getElementById('free-shipping-bar').style.width = `${progress}%`;
+            
+            const shippingText = document.getElementById('free-shipping-text');
+            if (subtotal >= freeThreshold) {
+                shippingText.innerText = '🎉 ¡ENHORABUENA! Tienes ENVÍO GRATIS exprés asegurado.';
+            } else {
+                const diff = (freeThreshold - subtotal).toFixed(2);
+                shippingText.innerText = `¡Añade ${diff} € más para ENVÍO GRATIS exprés!`;
+            }
+        }
+
+        function toggleCartModal(forceOpen = false) {
+            const modal = document.getElementById('cart-modal');
+            if (forceOpen) modal.classList.remove('hidden');
+            else modal.classList.toggle('hidden');
+        }
+
+        function applyCoupon() {
+            const val = document.getElementById('coupon-input').value.trim().toUpperCase();
+            const msg = document.getElementById('coupon-message');
+            
+            if (val === 'DANI90' || val === 'DANI50' || val === 'DANI10') {
+                appliedCoupon = val;
+                msg.className = "text-xs font-bold text-green-600 block";
+                msg.innerText = `¡Cupón ${val} aplicado con éxito!`;
+                updateCartUI();
+            } else {
+                msg.className = "text-xs font-bold text-red-600 block";
+                msg.innerText = 'Cupón inválido. Prueba con DANI90';
+            }
+        }
+
+        // --- RULETA DE DESCUENTOS ---
+        function openSpinWheel() {
+            document.getElementById('wheel-modal').classList.remove('hidden');
+        }
+
+        function closeWheelModal() {
+            document.getElementById('wheel-modal').classList.add('hidden');
+        }
+
+        function spinWheelAction() {
+            const spinner = document.getElementById('wheel-spinner');
+            const btn = document.getElementById('spin-btn');
+            btn.disabled = true;
+
+            const randomRot = 360 * 5 + 90; // Gira 5 vueltas y cae en 90%
+            spinner.style.transform = `rotate(${randomRot}deg)`;
+
+            setTimeout(() => {
+                document.getElementById('wheel-result').classList.remove('hidden');
+                document.getElementById('coupon-input').value = 'DANI90';
+                applyCoupon();
+            }, 4000);
+        }
+
+        // --- PROCESO DE CHECKOUT Y RECIBO IMPRIMIBLE ---
+        function processCheckout() {
+            if (cart.length === 0) {
+                alert('Añade al menos un producto a tu carrito para realizar el pago.');
+                return;
+            }
+
+            // Generar Datos de Recibo Realista
+            const now = new Date();
+            const orderId = '#DS-' + Math.floor(10000000 + Math.random() * 90000000);
+            const trackingCode = 'ES-' + Math.floor(10000 + Math.random() * 90000) + '-TEMU';
+            
+            document.getElementById('receipt-order-id').innerText = orderId;
+            document.getElementById('receipt-tracking-code').innerText = trackingCode;
+            document.getElementById('receipt-date').innerText = `${now.toLocaleDateString('es-ES')} - ${now.toLocaleTimeString('es-ES', {hour: '2-digit', minute:'2-digit'})}`;
+
+            const listContainer = document.getElementById('receipt-items-list');
+            listContainer.innerHTML = cart.map(item => `
+                <div class="flex justify-between border-b border-gray-100 pb-1">
+                    <div>
+                        <p class="font-bold text-black">${item.cartQty}x ${item.name}</p>
+                        <p class="text-[10px] text-gray-500">Var: ${item.selectedSize} | ${item.selectedColor}</p>
+                    </div>
+                    <span class="font-bold">${(item.price * item.cartQty).toFixed(2)} €</span>
+                </div>
+            `).join('');
+
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.cartQty), 0);
+            let discount = 0;
+            if (appliedCoupon === 'DANI90') discount = subtotal * 0.9;
+            else if (appliedCoupon === 'DANI50') discount = subtotal * 0.5;
+            else if (appliedCoupon === 'DANI10') discount = 10;
+            if (discount > subtotal) discount = subtotal;
+
+            const grandTotal = subtotal - discount;
+            const netSubtotal = grandTotal / 1.21;
+            const vatAmount = grandTotal - netSubtotal;
+
+            document.getElementById('receipt-net-subtotal').innerText = `${netSubtotal.toFixed(2)} €`;
+            document.getElementById('receipt-vat-amount').innerText = `${vatAmount.toFixed(2)} €`;
+            document.getElementById('receipt-discount-amount').innerText = `-${discount.toFixed(2)} €`;
+            document.getElementById('receipt-grand-total').innerText = `${grandTotal.toFixed(2)} €`;
+
+            // Vaciar carrito
+            cart = [];
+            appliedCoupon = null;
+            updateCartUI();
+            toggleCartModal();
+
+            // Abrir recibo
+            document.getElementById('receipt-modal').classList.remove('hidden');
+        }
+
+        function closeReceiptModal() {
+            document.getElementById('receipt-modal').classList.add('hidden');
+        }
+
+        // --- NOTIFICACIONES EN TIEMPO REAL (SOCIAL PROOF) & TIMER ---
+        function startTimersAndNotifications() {
+            // Temporizador relámpago top banner
+            let seconds = 15 * 60;
+            setInterval(() => {
+                seconds--;
+                if (seconds <= 0) seconds = 15 * 60;
+                const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+                const s = (seconds % 60).toString().padStart(2, '0');
+                document.getElementById('top-timer').innerText = `00:${m}:${s}`;
+            }, 1000);
+
+            // Toast Notificaciones emergentes
+            setInterval(() => {
+                if (allGeneratedProducts.length === 0) return;
+                const randomProd = allGeneratedProducts[Math.floor(Math.random() * allGeneratedProducts.length)];
+                const randomUser = NAMES_POOL[Math.floor(Math.random() * NAMES_POOL.length)];
+                const randomCity = CITIES_POOL[Math.floor(Math.random() * CITIES_POOL.length)];
+
+                document.getElementById('toast-img').src = randomProd.img;
+                document.getElementById('toast-title').innerText = randomProd.name;
+                document.getElementById('toast-price').innerHTML = `${randomProd.price.toFixed(2)} € <span class="line-through text-gray-400 font-normal text-[10px]">${randomProd.oldPrice.toFixed(2)} €</span>`;
+                document.getElementById('toast-user').innerText = `${randomUser} (${randomCity})`;
+                document.getElementById('toast-time').innerText = `${Math.floor(Math.random() * 5 + 1)}s`;
+
+                const toast = document.getElementById('toast-social-proof');
+                toast.classList.remove('-translate-x-full');
+
+                setTimeout(() => {
+                    toast.classList.add('-translate-x-full');
+                }, 4000);
+            }, 9000);
+        }
+
+        function closeToast() {
+            document.getElementById('toast-social-proof').classList.add('-translate-x-full');
+        }
+    </script>
+</body>
+</html>
